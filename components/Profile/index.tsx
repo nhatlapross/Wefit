@@ -80,7 +80,7 @@ export default function Profile() {
 
   const ListNFT = [
     {
-      id: 1,
+      tx_hash: '6084919291',
       title: 'NFT 1',
       image: 'https://th.bing.com/th/id/OIP.9epyABsKLdxw0h4-X68oewHaHa?rs=1&pid=ImgDetMain',
       owner: 'John Doe',
@@ -88,7 +88,7 @@ export default function Profile() {
       price: 100,
     },
     {
-      id: 2,
+      tx_hash: '6084919274',
       title: 'NFT 2',
       image: 'https://th.bing.com/th/id/OIP.9epyABsKLdxw0h4-X68oewHaHa?rs=1&pid=ImgDetMain',
       owner: 'Jane Doe',
@@ -96,7 +96,7 @@ export default function Profile() {
       price: 50,
     },
     {
-      id: 3,
+      tx_hash: '6084919269',
       title: 'NFT 3',
       image: 'https://th.bing.com/th/id/OIP.9epyABsKLdxw0h4-X68oewHaHa?rs=1&pid=ImgDetMain',
       owner: 'Mike Doe',
@@ -111,8 +111,9 @@ export default function Profile() {
   }
 
   const handleNFTOpen = (nft: any) => {
-    setSelectedNFT(nft);
-    onNFTOpen();
+    // setSelectedNFT(nft);
+    // onNFTOpen();
+    window.open(`https://explorer.aptoslabs.com/txn/${nft.tx_hash}?network=testnet`, "_self")
   }
 
   return (
@@ -167,7 +168,7 @@ export default function Profile() {
 
           <Slider {...settings}>
             {ListNFT.map(item => (
-              <div key={item.id} className="px-2">
+              <div key={item.tx_hash} className="px-2">
                 <Card isFooterBlurred className="py-4">
                   <CardHeader className="absolute z-10 top-1 flex-col items-start">
                     <p className="text-tiny text-white/60 uppercase font-bold">{item.owner}</p>
