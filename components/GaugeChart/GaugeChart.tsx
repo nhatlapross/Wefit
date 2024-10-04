@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 import toast, { Toaster } from 'react-hot-toast';
 import moment from 'moment';
-import ic from 'ic0';
 
 interface GaugeChartProps {
   value: number;
@@ -31,7 +30,6 @@ const GaugeChart: React.FC<GaugeChartProps> = ({ value, maxValue, onClaimSuccess
 
   const COLORS = ['#FFA500', '#FFC0CB'];
 
-  const backend = ic(process.env.NEXT_PUBLIC_CANISTER_URL as string);
 
   const start = () =>{
     if(status == 1)
@@ -39,13 +37,6 @@ const GaugeChart: React.FC<GaugeChartProps> = ({ value, maxValue, onClaimSuccess
       const now = moment();
       toast.success(`Checkin successful at ${now.format('YYYY-MM-DD HH:mm:ss')}.`)
       setStatus(2);
-
-      try{
-        backend.call('insert_exam', 5, {out_of: 6, curve:6, course:"fitness"});
-      }
-      catch(error){
-        console.error(error);
-      }
     }
     if(status == 2){
       const now = moment();

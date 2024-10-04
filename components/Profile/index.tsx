@@ -144,7 +144,7 @@ export default function Profile() {
               </div>
               <div className="bg-gray-200 text-gray-800 p-4 rounded-lg">
                 <div className="flex justify-between items-center mb-2">
-                  <h3 className="text-lg font-bold">ICP</h3>
+                  <h3 className="text-lg font-bold">APT</h3>
                   <Button className="text-tiny" color="primary" radius="full" size="sm" onPress={() => handleOpen()}>
                     Convert
                   </Button>

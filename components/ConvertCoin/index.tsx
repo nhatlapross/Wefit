@@ -43,28 +43,28 @@ const ConvertCoin = () => {
         {
             key: "1",
             date: formatDateTimeToLocaleString(new Date("08/09/2024")),
-            amountICP: 1000,
+            amountAPT: 1000,
             amountBTC: 0.014191271187083087,
             status: "Success",
         },
         {
             key: "2",
             date: formatDateTimeToLocaleString(new Date("09/09/2024")),
-            amountICP: 2000,
+            amountAPT: 2000,
             amountBTC: 0.14191271187083088,
             status: "Success",
         },
         {
             key: "3",
             date: formatDateTimeToLocaleString(new Date("10/09/2024")),
-            amountICP: 3000,
+            amountAPT: 3000,
             amountBTC: 0.28382542374166175,
             status: "Fail",
         },
         {
             key: "4",
             date: formatDateTimeToLocaleString(new Date("11/09/2024")),
-            amountICP: 1500,
+            amountAPT: 1500,
             amountBTC: 0.021286906780624632,
             status: "Success",
         },
@@ -76,8 +76,8 @@ const ConvertCoin = () => {
             label: "TIME",
         },
         {
-            key: "amountICP",
-            label: "AMOUNT ICP",
+            key: "amountAPT",
+            label: "AMOUNT APT",
         },
         {
             key: "amountBTC",
@@ -106,7 +106,7 @@ const ConvertCoin = () => {
         const newRow = {
             key: (rows.length + 1).toString(),
             date: formatDateTimeToLocaleString(new Date()),
-            amountICP: sellAmount,
+            amountAPT: sellAmount,
             amountBTC: buyAmount,
             status: "Success",
         };
@@ -142,7 +142,7 @@ const ConvertCoin = () => {
                 <CardBody className="p-6">
                     <div className="space-y-4">
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">From(max: 5000 ICP)</label>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">From(max: 5000 APT)</label>
                             <Input
                                 type="text"
                                 value={sellAmount.toString()}
@@ -150,7 +150,7 @@ const ConvertCoin = () => {
                                 className="w-full"
                                 max={5000}
                                 endContent={
-                                    <h4>ICP</h4>
+                                    <h4>APT</h4>
                                 }
                             />
                             <p className="text-sm text-gray-500 mt-1">$8.05</p>
@@ -191,7 +191,7 @@ const ConvertCoin = () => {
                         {(item) => (
                             <TableRow>
                                 <TableCell>{item.date}</TableCell>
-                                <TableCell>{item.amountICP}</TableCell>
+                                <TableCell>{item.amountAPT}</TableCell>
                                 <TableCell>{item.amountBTC}</TableCell>
                                 <TableCell>{item.status}</TableCell>
                             </TableRow>

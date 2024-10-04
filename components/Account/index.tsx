@@ -1,6 +1,5 @@
 "use client";
-// import Image from "next/image";
-// import avatar from "@/asset/avatar.jpg"
+
 import { useRouter } from 'next/navigation';
 import NotiIcon from "@/asset/icon/NotiIcon";
 import LogoIconSmall from "@/asset/icon/LogoSmall";
@@ -31,7 +30,6 @@ import Step7dayChart from "../SevenDayStep";
 import GaugeChart from "../GaugeChart/GaugeChart";
 import { Image } from "@nextui-org/image";
 import LogoutIcon from "@/asset/icon/LogoutIcon";
-import ic from 'ic0';
 import Hackathon from '../Hackathon';
 import { Button } from '@nextui-org/react';
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure } from "@nextui-org/react";
@@ -68,7 +66,6 @@ const Account = () => {
     const [fitData, setFitData] = useState<FitnessData>({ steps: 0, distance: 0, activeDuration: 0, calories: 0 });
     const [toTal, setTotal] = useState<Total>({ distance: 25.06, hour: 25, minute: 10, coin: 4995 });
     const { data: session } = useSession() || {};
-    const ledger = ic(process.env.NEXT_PUBLIC_CANISTER_URL as string);
     const { isOpen, onOpen, onClose } = useDisclosure();
 
     useEffect(() => {
