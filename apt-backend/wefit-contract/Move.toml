@@ -1,0 +1,22 @@
+[package]
+name = "wefit"
+version = "1.0.0"
+authors = []
+
+[addresses]
+wefit="73722d480a7a95ef700c10a5649836bcfd735ce2f74363cca1a26a4695014128"
+
+[dev-addresses]
+wefit="73722d480a7a95ef700c10a5649836bcfd735ce2f74363cca1a26a4695014128"
+
+[dependencies.AptosFramework]
+git = "https://github.com/aptos-labs/aptos-core.git"
+rev = "testnet"
+subdir = "aptos-move/framework/aptos-framework"
+
+[dependencies.AptosToken]
+git = "https://github.com/aptos-labs/aptos-core.git"
+rev = "testnet"
+subdir = "aptos-move/framework/aptos-token"
+
+[dev-dependencies]
