@@ -102,6 +102,14 @@ export default function Profile() {
       owner: 'Mike Doe',
       description: 'This is certificate for joining the champions',
       price: 150,
+    },
+    {
+      id: 4,
+      title: 'Race 3: Half Marathon',
+      image: 'https://th.bing.com/th/id/OIP.9epyABsKLdxw0h4-X68oewHaHa?rs=1&pid=ImgDetMain',
+      owner: 'Nhat Nguyen',
+      description: 'This is certificate for joining Half Marathon champion',
+      price: 200,
     }
   ];
 
@@ -111,8 +119,10 @@ export default function Profile() {
   }
 
   const handleNFTOpen = (nft: any) => {
-    setSelectedNFT(nft);
-    onNFTOpen();
+    // setSelectedNFT(nft);
+    // onNFTOpen();
+    var tx_hash = localStorage.getItem('tx_hash');
+    window.open(`https://explorer.aptoslabs.com/txn/${tx_hash}?network=testnet`, "_self")
   }
 
   return (

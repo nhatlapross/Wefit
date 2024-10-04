@@ -2,6 +2,7 @@ import express from 'express';
 import axios from 'axios';
 import { AptosClient, AptosAccount, Types, HexString } from "aptos";
 import { Aptos, AptosConfig, MoveStructId, Network } from '@aptos-labs/ts-sdk';
+import cors from 'cors';
 
 const aptos = new Aptos(
     new AptosConfig({ network: 'testnet' as Network })
@@ -14,6 +15,14 @@ const port = 3003;
 const client = new AptosClient('https://fullnode.devnet.aptoslabs.com');
 
 app.use(express.json());
+
+// CORS configuration
+const corsOptions = {
+  origin: 'http://localhost:3000', // Allow only your Next.js app origin
+  credentials: true, // Allow credentials
+};
+
+app.use(cors(corsOptions));
 
 //create challenge
 app.post('/challenge', async (req, res) => {
