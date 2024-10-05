@@ -17,11 +17,13 @@
     "@types/express": "^5.0.0",
     "@types/node": "^22.7.2",
     "aptos": "^1.21.0",
+    "cors": "^2.8.5",
     "express": "^4.21.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.2"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.17",
     "nodemon": "^3.1.7"
   }
 }

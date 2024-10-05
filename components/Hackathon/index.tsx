@@ -11,6 +11,7 @@ import { ChevronIcon } from "@/asset/icon/ChevronIcon";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import useClaim from '../hooks/useClaim';
 
 interface IMyHackathon {
     id: number;
@@ -25,6 +26,7 @@ interface IMyHackathon {
 export default function Hackathon() {
     const [selected, setSelected] = useState("allHackathon");
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const { claim: claimReward, isLoading: isClaimLoading } = useClaim();
     const [selectedItem, setSelectedItem] = useState<IMyHackathon>({
         id: 1,
         title: 'Race 1: 5K Fun Run',
@@ -114,11 +116,20 @@ export default function Hackathon() {
         {
             id: 3,
             title: 'Race 3: Half Marathon',
-            image: "https://th.bing.com/th/id/OIP.1uXtoUUGbs72yCVrIL9prQHaH0?w=178&h=187&c=7&r=0&o=5&pid=1.7",
+            image: "https://th.bing.com/th/id/OIP.9epyABsKLdxw0h4-X68oewHaHa?rs=1&pid=ImgDetMain",
             timeStart: '01/01/2024 00:00',
             timeEnd: '12/12/2024 00:00',
             status: 'completed',
             rank: 56
+        },
+        {
+            id: 4,
+            title: 'Wefit365 Race',
+            image: "https://assets-global.website-files.com/619cef5c40cb8925cd33ece3/621e3c9005658fc23c531509_619cef5c40cb89bb5133f8c6_template-vignette-HACKATHON-1200x900-FR.png",
+            timeStart: '01/01/2024 00:00',
+            timeEnd: '12/12/2024 00:00',
+            status: 'upcoming',
+            rank: 10
         },
     ]
 
@@ -206,9 +217,17 @@ export default function Hackathon() {
         toast.success('You are join ' + data.title + ' successful! Start time at ' + formatDateTimeToLocaleString(new Date()));
     }
 
+
     const viewLeaderboard = (item: any) => {
-        setSelectedItem(item);
-        onOpen();
+        if(item.status === 'completed')
+        {
+            claimReward('0x32f49e78e9b92ac776beca1b49ad4aaec87f17372a9f2ef032d7db23c262a359')
+            .catch(error => console.error('Claim error:', error));
+        }
+        else{
+            setSelectedItem(item);
+            onOpen();
+        }
     }
 
     return (
@@ -251,7 +270,7 @@ export default function Hackathon() {
                                                 </div>
 
                                                 <Button className="text-tiny" color="primary" radius="full" size="sm" onPress={() => viewLeaderboard(item)}>
-                                                    Leaderboard
+                                                    {item.status=='completed'?'Claim':'Leaderboard'}
                                                 </Button>
                                             </CardFooter>
                                         </Card>
