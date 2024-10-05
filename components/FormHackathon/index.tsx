@@ -4,8 +4,8 @@ import { DateRangePicker } from "@nextui-org/react";
 import { parseZonedDateTime } from "@internationalized/date";
 import Image from 'next/image';
 import toast, { Toaster } from 'react-hot-toast';
-
-
+import useRegister from '../hooks/useRegister';
+import { useSession } from 'next-auth/react';
 export default function FormHackathon() {
     const [selectedFile, setSelectedFile] = useState<string | null>(null);
     const [formData, setFormData] = useState({
@@ -15,7 +15,8 @@ export default function FormHackathon() {
         startDate: parseZonedDateTime("2024-04-01T00:45[America/Los_Angeles]"),
         endDate: parseZonedDateTime("2024-04-08T11:15[America/Los_Angeles]"),
     });
-
+    const { register: registerUser, isLoading: isRegisterLoading } = useRegister();
+    const { data: session } = useSession() || {};
     const handleFileChange = (e: any) => {
         const file = e.target.files[0];
         if (file) {
@@ -69,6 +70,8 @@ export default function FormHackathon() {
             throw new Error('Network response was not ok');
           }
           const data = await response.json();
+          registerUser(session?.user?.email)
+          .catch(error => console.error('Claim error:', error));
         } catch (err) {
             //error message
         } finally {

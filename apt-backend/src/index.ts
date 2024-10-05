@@ -65,6 +65,7 @@ app.post('/register', async (req, res) => {
     const account = new AptosAccount(new HexString(privateKey).toUint8Array());
     const addr = account.address()
     const symbol = 'PQD'
+    const email = req.body.email
     
     const payload: Types.TransactionPayload = {
         type: "entry_function_payload",
@@ -72,7 +73,7 @@ app.post('/register', async (req, res) => {
         type_arguments:[],
         arguments: [
           2411,
-          "wefit@gmail.com"
+          email
         ],          
     };
     

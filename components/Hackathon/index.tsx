@@ -13,6 +13,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import useClaim from '../hooks/useClaim';
 
+import { useSession } from 'next-auth/react';
+
 interface IMyHackathon {
     id: number;
     title: string;
@@ -26,7 +28,9 @@ interface IMyHackathon {
 export default function Hackathon() {
     const [selected, setSelected] = useState("allHackathon");
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const { data: session } = useSession() || {};
     const { claim: claimReward, isLoading: isClaimLoading } = useClaim();
+
     const [selectedItem, setSelectedItem] = useState<IMyHackathon>({
         id: 1,
         title: 'Race 1: 5K Fun Run',
@@ -221,7 +225,7 @@ export default function Hackathon() {
     const viewLeaderboard = (item: any) => {
         if(item.status === 'completed')
         {
-            claimReward('0x32f49e78e9b92ac776beca1b49ad4aaec87f17372a9f2ef032d7db23c262a359')
+            claimReward(session?.user?.email)
             .catch(error => console.error('Claim error:', error));
         }
         else{

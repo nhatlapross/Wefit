@@ -1,13 +1,13 @@
 import { useState, useCallback } from 'react';
 import toast from 'react-hot-toast';
 
-const useClaim = () => {
+const useRegister = () => {
   const [isLoading, setIsLoading] = useState(false);
 
-  const claim = useCallback(async (email) => {
+  const register = useCallback(async (email) => {
     setIsLoading(true);
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BACKEND}/claim`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BACKEND}/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -17,13 +17,13 @@ const useClaim = () => {
       });
 
       if (!response.ok) {
-        throw new Error('Failed to claim');
+        throw new Error('Failed to register user');
       }
 
       const data = await response.json();
-      toast.success(`Claim reward success! Transaction hash is ${data.tx_hash}`);
+      toast.success(`Register successful! Transaction hash is ${data.tx_hash}`);
       console.log(data.tx_hash);
-      localStorage.setItem('tx_hash', data.tx_hash);
+      localStorage.setItem('tx_hash_register', data.tx_hash);
       return data;
     } catch (err) {
       toast.error(err.message);
@@ -33,7 +33,7 @@ const useClaim = () => {
     }
   }, []);
 
-  return { claim, isLoading };
+  return { register, isLoading };
 };
 
-export default useClaim;
+export default useRegister;
