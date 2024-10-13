@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import Profile from '@/components/Profile';
+import Footer from '@/components/Footer';
 
 
 const ProfilePage: React.FC = () => {
     return (
-        <div>
+        <div className='bg-white'>
             <Profile />
+            <Footer />
         </div>
     );
 

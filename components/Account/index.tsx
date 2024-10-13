@@ -34,6 +34,11 @@ import Hackathon from '../Hackathon';
 import { Button } from '@nextui-org/react';
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure } from "@nextui-org/react";
 import FormHackathon from '../FormHackathon';
+import CircularProgressChart from '../CircularProgressChart';
+import RidingTabIcon from '@/asset/icon/RidingTabIcon';
+import RunningTabIcon from '@/asset/icon/RunningTabIcon';
+import WorkoutTabIcon from '@/asset/icon/WorkoutTabIcon';
+import Header from '../Header';
 
 interface FitnessData {
     steps: number,
@@ -128,13 +133,12 @@ const Account = () => {
 
     return (
         <>
-            <div className="w-full flex justify-between items-center">
+            {/* <div className="w-full flex justify-between items-center">
                 <div className="flex items-center gap-3">
-                    {/* <Image src={avatar} alt='avatar' className="w-10 h-10 rounded-full border-2 border-stone-900 object-cover" /> */}
                     <Image
                         isZoomed
-                        width={45}
-                        radius="full"
+                        width={60}
+                        radius="lg"
                         alt="NextUI Fruit Image with Zoom"
                         src={session?.user?.image ?? "/path/to/default/image.jpg"
                         }
@@ -145,52 +149,62 @@ const Account = () => {
                 <button onClick={() => signOut()}>
                     <LogoutIcon />
                 </button>
-            </div>
+            </div> */}
+            <Header />
 
-            <div className="card">
-                <h1 className="font-bold">Beginner</h1>
-                <div className="my-1 flex items-center">
-                    <LogoIconSmall /><span className="text-[32px] leading-normal font-bold">{toTal.coin}</span>
-                </div>
-                <div className="flex items-center gap-x-6">
-                    <div>
-                        <h2 className="text-[10px] font-medium">Total distances</h2>
-                        <div>
-                            <span className="text-xl leading-normal font-bold">{toTal.distance}</span> <span className="text-xs leading-normal">km</span>
-                        </div>
-                    </div>
-                    <div>
-                        <h2 className="text-[10px] font-medium">Total time</h2>
-                        <div>
-                            <span className="text-xl leading-normal font-bold">{toTal.hour}</span> <span className="text-xs leading-normal">hrs</span>
-                            {" "}
-                            <span className="text-xl leading-normal font-bold">{toTal.minute}</span> <span className="text-xs leading-normal">min</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
             <Hackathon />
-            <Button className="flex justify-center items-center my-1 bg-primary" onPress={onOpen}>Create your hackathon</Button>
-            <div className="flex justify-center items-center">
-                <GaugeChart value={fitData.steps} maxValue={10000} onClaimSuccess={onClaimSuccess} />
+            <Button className="flex justify-center items-center my-1 bg-primary" onPress={onOpen}>New Champion</Button>
+            {/* <div className="flex justify-center items-center">
+                <GaugeChart value={5000} maxValue={10000} onClaimSuccess={onClaimSuccess} />
+            </div> */}
+            <div className="flex justify-center items-center ">
+                <CircularProgressChart value={0.00} maxValue={10.00} onClaimSuccess={onClaimSuccess} />
             </div>
-            <div className="my-12">
+            {/* <div className="my-12">
                 <h1 className="text-center mb-4 text-xl font-bold">Your step in 7 days ago</h1>
                 {stepData.length > 0 ? (
                     <Step7dayChart data={stepData} />
                 ) : (
                     <p className="text-center">Loading step data...</p>
                 )}
-            </div>
+            </div> */}
 
             <Tabs
                 value={selectedTab}
                 onChange={changeTabHandler}
             >
-                <Tab index="0">Swimming</Tab>
-                <Tab index="1">Riding</Tab>
-                <Tab index="2">Running</Tab>
-                <Tab index="3">Workout</Tab>
+                {/* <Tab index="0">Swimming</Tab> */}
+                <Tab index="1">
+                    <div className="flex items-center gap-1">
+                        <div className="p-0.5">
+                            <RidingTabIcon width={selectedTab ==1?26:20} height={selectedTab ==1?26:20} color={selectedTab ==1?'#FF4800':'#808080'} />
+                        </div>
+                        <div>
+                            <span className="font-bold">Riding</span><br />
+                        </div>
+                    </div>
+                </Tab>
+                <Tab index="2">
+                    <div className="flex items-center gap-1">
+                        <div className="p-0.5">
+                            <RunningTabIcon width={selectedTab ==2?26:20} height={selectedTab ==2?26:20} color={selectedTab ==2?'#FF4800':'#808080'} />
+                        </div>
+                        <div>
+                            <span className="font-bold">Running</span><br />
+                        </div>
+                    </div>
+                </Tab>
+                <Tab index="3">
+                    <div className="flex items-center gap-1">
+                        <div className="p-0.5">
+                            <WorkoutTabIcon width={selectedTab ==3?26:20} height={selectedTab ==3?26:20} color={selectedTab ==3?'#FF4800':'#808080'} />
+                        </div>
+                        <div>
+                            <span className="font-bold">Workout</span><br />
+                        </div>
+                    </div>
+                </Tab>
             </Tabs>
 
             <div className="mt-8">
@@ -445,7 +459,7 @@ const Account = () => {
                 <ModalContent>
                     {(onClose) => (
                         <>
-                            <ModalHeader className="flex flex-col gap-1">Create Hackathon</ModalHeader>
+                            <ModalHeader className="flex flex-col gap-1 text-white">New Champion</ModalHeader>
                             <ModalBody>
                                 <FormHackathon />
                             </ModalBody>

@@ -11,6 +11,19 @@ import { ChevronIcon } from "@/asset/icon/ChevronIcon";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import useClaim from '../hooks/useClaim';
+
+import { useSession } from 'next-auth/react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/pagination';
+
+import './styles.css';
+import { EffectCoverflow, Pagination } from 'swiper/modules';
+import DollarIcon from "@/asset/icon/DollarIcon";
+import ManIcon from "@/asset/icon/ManIcon";
+
 
 interface IMyHackathon {
     id: number;
@@ -25,6 +38,9 @@ interface IMyHackathon {
 export default function Hackathon() {
     const [selected, setSelected] = useState("allHackathon");
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const { data: session } = useSession() || {};
+    const { claim: claimReward, isLoading: isClaimLoading } = useClaim();
+
     const [selectedItem, setSelectedItem] = useState<IMyHackathon>({
         id: 1,
         title: 'Race 1: 5K Fun Run',
@@ -39,18 +55,17 @@ export default function Hackathon() {
         className: "center",
         centerMode: true,
         infinite: true,
-        centerPadding: "60px",
+        centerPadding: "0px",
         slidesToShow: 3,
         speed: 500,
         dots: true,
-        nextArrow: <SampleNextArrow />,
-        prevArrow: <SamplePrevArrow />,
+        color: "white",
         responsive: [
             {
                 breakpoint: 1024,
                 settings: {
                     slidesToShow: 3,
-                    centerPadding: "40px",
+                    centerPadding: "0px",
                 }
             },
             {
@@ -75,7 +90,7 @@ export default function Hackathon() {
         return (
             <div
                 className={className}
-                style={{ ...style,color: "orange"}}
+                style={{ ...style, color: "orange" }}
                 onClick={onClick}
             />
         );
@@ -86,7 +101,7 @@ export default function Hackathon() {
         return (
             <div
                 className={className}
-                style={{ ...style,color: "orange" }}
+                style={{ ...style, color: "orange" }}
                 onClick={onClick}
             />
         );
@@ -97,28 +112,41 @@ export default function Hackathon() {
             id: 1,
             title: 'Race 1: 5K Fun Run',
             image: "https://th.bing.com/th/id/OIP.HPRn0m__rRe18Rs3j4wkrQHaH_?w=173&h=187&c=7&r=0&o=5&pid=1.7",
-            timeStart: '01/01/2024 00:00',
-            timeEnd: '12/12/2024 00:00',
+            timeStart: '01/01/2024',
+            timeEnd: '12/12/2024',
             status: 'upcoming',
+            total:1000,
             rank: 23
         },
         {
             id: 2,
             title: 'Race 2: 10K Challenge',
             image: "https://th.bing.com/th/id/OIP.SUFrYYQSpoEjiUcsg10rRwHaHa?rs=1&pid=ImgDetMain",
-            timeStart: '01/01/2024 00:00',
-            timeEnd: '12/12/2024 00:00',
+            timeStart: '01/01/2024',
+            timeEnd: '12/12/2024',
             status: 'ongoing',
+            total:1500,
             rank: 24
         },
         {
             id: 3,
             title: 'Race 3: Half Marathon',
-            image: "https://th.bing.com/th/id/OIP.1uXtoUUGbs72yCVrIL9prQHaH0?w=178&h=187&c=7&r=0&o=5&pid=1.7",
-            timeStart: '01/01/2024 00:00',
-            timeEnd: '12/12/2024 00:00',
+            image: "https://th.bing.com/th/id/OIP.9epyABsKLdxw0h4-X68oewHaHa?rs=1&pid=ImgDetMain",
+            timeStart: '01/01/2024',
+            timeEnd: '12/12/2024',
             status: 'completed',
+            total:2000,
             rank: 56
+        },
+        {
+            id: 4,
+            title: 'Wefit365 Race',
+            image: "https://assets-global.website-files.com/619cef5c40cb8925cd33ece3/621e3c9005658fc23c531509_619cef5c40cb89bb5133f8c6_template-vignette-HACKATHON-1200x900-FR.png",
+            timeStart: '01/01/2024',
+            timeEnd: '12/12/2024',
+            status: 'upcoming',
+            total:3000,
+            rank: 10
         },
     ]
 
@@ -128,8 +156,8 @@ export default function Hackathon() {
             title: 'Race 1: 5K Fun Run',
             joining: 100,
             image: "https://th.bing.com/th/id/OIP.HPRn0m__rRe18Rs3j4wkrQHaH_?w=173&h=187&c=7&r=0&o=5&pid=1.7",
-            timeStart: '01/01/2024 00:00',
-            timeEnd: '12/12/2024 00:00',
+            timeStart: '01/01/2024',
+            timeEnd: '12/12/2024',
             status: 'upcoming'
         },
         {
@@ -137,8 +165,8 @@ export default function Hackathon() {
             title: 'Race 2: 10K Challenge',
             joining: 200,
             image: "https://th.bing.com/th/id/OIP.SUFrYYQSpoEjiUcsg10rRwHaHa?rs=1&pid=ImgDetMain",
-            timeStart: '01/01/2024 00:00',
-            timeEnd: '12/12/2024 00:00',
+            timeStart: '01/01/2024',
+            timeEnd: '12/12/2024',
             status: 'ongoing'
         },
         {
@@ -146,8 +174,8 @@ export default function Hackathon() {
             title: 'Race 3: Half Marathon',
             joining: 300,
             image: "https://th.bing.com/th/id/OIP.1uXtoUUGbs72yCVrIL9prQHaH0?w=178&h=187&c=7&r=0&o=5&pid=1.7",
-            timeStart: '01/01/2024 00:00',
-            timeEnd: '12/12/2024 00:00',
+            timeStart: '01/01/2024',
+            timeEnd: '12/12/2024',
             status: 'completed'
         },
         {
@@ -155,8 +183,8 @@ export default function Hackathon() {
             title: 'Race 5: End of Marathon',
             joining: 400,
             image: "https://th.bing.com/th/id/OIP.2id1rOvG2mH1os0sVFUUNgHaHa?w=188&h=187&c=7&r=0&o=5&pid=1.7",
-            timeStart: '01/01/2024 00:00',
-            timeEnd: '12/12/2024 00:00',
+            timeStart: '01/01/2024',
+            timeEnd: '12/12/2024',
             status: 'completed'
         },
         {
@@ -164,8 +192,8 @@ export default function Hackathon() {
             title: 'Race 1: 5K Fun Run',
             joining: 100,
             image: "https://th.bing.com/th/id/OIP.HPRn0m__rRe18Rs3j4wkrQHaH_?w=173&h=187&c=7&r=0&o=5&pid=1.7",
-            timeStart: '01/01/2024 00:00',
-            timeEnd: '12/12/2024 00:00',
+            timeStart: '01/01/2024',
+            timeEnd: '12/12/2024',
             status: 'upcoming'
         },
         {
@@ -173,8 +201,8 @@ export default function Hackathon() {
             title: 'Race 2: 10K Challenge',
             joining: 200,
             image: "https://th.bing.com/th/id/OIP.SUFrYYQSpoEjiUcsg10rRwHaHa?rs=1&pid=ImgDetMain",
-            timeStart: '01/01/2024 00:00',
-            timeEnd: '12/12/2024 00:00',
+            timeStart: '01/01/2024',
+            timeEnd: '12/12/2024',
             status: 'ongoing'
         },
         {
@@ -182,8 +210,8 @@ export default function Hackathon() {
             title: 'Race 3: Half Marathon',
             joining: 300,
             image: "https://th.bing.com/th/id/OIP.1uXtoUUGbs72yCVrIL9prQHaH0?w=178&h=187&c=7&r=0&o=5&pid=1.7",
-            timeStart: '01/01/2024 00:00',
-            timeEnd: '12/12/2024 00:00',
+            timeStart: '01/01/2024',
+            timeEnd: '12/12/2024',
             status: 'completed'
         },
         {
@@ -191,8 +219,8 @@ export default function Hackathon() {
             title: 'Race 5: End of Marathon',
             joining: 400,
             image: "https://th.bing.com/th/id/OIP.2id1rOvG2mH1os0sVFUUNgHaHa?w=188&h=187&c=7&r=0&o=5&pid=1.7",
-            timeStart: '01/01/2024 00:00',
-            timeEnd: '12/12/2024 00:00',
+            timeStart: '01/01/2024',
+            timeEnd: '12/12/2024',
             status: 'completed'
         },
     ]
@@ -206,93 +234,146 @@ export default function Hackathon() {
         toast.success('You are join ' + data.title + ' successful! Start time at ' + formatDateTimeToLocaleString(new Date()));
     }
 
+
     const viewLeaderboard = (item: any) => {
-        setSelectedItem(item);
-        onOpen();
+        if (item.status === 'completed') {
+            claimReward(session?.user?.email)
+                .catch(error => console.error('Claim error:', error));
+        }
+        else {
+            setSelectedItem(item);
+            onOpen();
+        }
     }
 
     return (
         <>
             <div className="flex w-full flex-col mt-5">
                 <Tabs
-                    aria-label="Options"
-                    color="primary"
+                    aria-label="Tabs colors"
+                    color="secondary"
                     classNames={{
-                        cursor: "bg-primary text-white",
-                        tabContent: "group-data-[selected=true]:text-white"
+                        cursor: "bg-primary",
+                        tabList: "bg-white text-primary",
+                        tabContent: "group-data-[selected=true]:text-white text-orange-500",
+                        tab: "border border-primary",
                     }}
                     selectedKey={selected}
                     onSelectionChange={(e: any) => setSelected(e.key)}
                 >
                     <Tab key="myHackathon" title="My Champion">
-                        <div>
-                            <Slider {...settings}>
-                                {myHackathon.map(item => (
-                                    <div key={item.id} className="px-2">
-                                        <Card className="py-4">
-                                            <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-                                                <p className="text-tiny uppercase font-bold">{item.status}</p>
-                                                <small className="text-default-500">Your rank: {item.rank}</small>
-                                                <h4 className="font-bold text-large">{item.title}</h4>
-                                            </CardHeader>
-                                            <CardBody className="overflow-visible py-2">
-                                                <Image
-                                                    alt="Card background"
-                                                    className="object-cover rounded-xl"
-                                                    src={item.image}
-                                                    width={270}
-                                                />
-                                            </CardBody>
-                                            <CardFooter className="bg-white/30 bottom-0 border-t-1 border-zinc-100/50 z-10 justify-between">
-
-                                                <div className="flex items-center gap-1">
-                                                    <TimeIcon />
-                                                    <span className="text-[10px] font-medium text-[#81819C]">{item.timeStart} - {item.timeEnd}</span>
+                        <Swiper
+                            effect={'coverflow'}
+                            grabCursor={true}
+                            centeredSlides={true}
+                            slidesPerView={'auto'}
+                            coverflowEffect={{
+                                rotate: 50,
+                                stretch: 0,
+                                depth: 100,
+                                modifier: 1,
+                                slideShadows: false,
+                            }}
+                            pagination={true}
+                            loop={true}
+                            modules={[EffectCoverflow, Pagination]}
+                            className="mySwiper"
+                        >
+                            {myHackathon.map((item, index) => (
+                                <SwiperSlide>
+                                    <Card className={`py-2 bg-white border border-[#521400]/0.1`}>
+                                        <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
+                                            <p className={`${item.status == 'upcoming' ? "text-yellow-500" : item.status == 'ongoing' ? "text-green-500" : "text-red-500"} uppercase font-bold`}>{item.status}</p>
+                                            <h4 className="font-bold text-large text-black">{item.title}</h4>
+                                            <small className="text-default-500">Your rank: {item.rank}</small>
+                                        </CardHeader>
+                                        <CardBody className="overflow-visible py-2">
+                                            <Image
+                                                alt="Card background"
+                                                className="object-cover rounded-xl"
+                                                src={item.image}
+                                                width={270}
+                                            />
+                                        </CardBody>
+                                        <CardFooter className="bg-white/30 bottom-0 border-t-1 border-zinc-100/50 z-10 flex flex-col items-start">
+                                            <div className="flex items-center gap-1">
+                                                <TimeIcon />
+                                                <span className="text-[10px] font-medium text-[#81819C]">{item.timeStart} - {item.timeEnd}</span>
+                                            </div>
+                                            <div className="flex items-center gap-1 mt-1">
+                                                <DollarIcon />
+                                                <div>
+                                                    <span className="text-[10px] font-medium text-[#81819C]">{item.total}$</span>
                                                 </div>
-
-                                                <Button className="text-tiny" color="primary" radius="full" size="sm" onPress={() => viewLeaderboard(item)}>
-                                                    Leaderboard
+                                            </div>
+                                            <div className="w-full flex justify-center mt-2">
+                                                <Button className="flex items-center text-tiny" color="primary" radius="full" size="sm" onPress={() => viewLeaderboard(item)}>
+                                                    {item.status == 'completed' ? 'Claim' : 'Leaderboard'}
                                                 </Button>
-                                            </CardFooter>
-                                        </Card>
-                                    </div>
-                                ))}
-                            </Slider>
-                        </div>
+                                            </div>
+                                        </CardFooter>
+                                    </Card>
+                                </SwiperSlide>
+                            ))}
+                        </Swiper>
                     </Tab>
                     <Tab key="allHackathon" title="All Champion">
-                        <div>
-                            <Slider {...settings}>
-                                {AllHackathon.map(item => (
-                                    <div key={item.id} className="px-2">
-                                        <Card className="py-4">
-                                            <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-                                                <p className="text-tiny uppercase font-bold">{item.status}</p>
-                                                <small className="text-default-500">Number of Participants: {item.joining}</small>
-                                                <h4 className="font-bold text-large">{item.title}</h4>
-                                            </CardHeader>
-                                            <CardBody className="overflow-visible py-2">
-                                                <Image
-                                                    alt="Card background"
-                                                    className="object-cover rounded-xl"
-                                                    src={item.image}
-                                                    width={270}
-                                                />
-                                            </CardBody>
-                                            <CardFooter className="bg-white/30 bottom-0 border-t-1 border-zinc-100/50 z-10 justify-between">
+                        <Swiper
+                            effect={'coverflow'}
+                            grabCursor={true}
+                            centeredSlides={true}
+                            slidesPerView={'auto'}
+                            coverflowEffect={{
+                                rotate: 50,
+                                stretch: 0,
+                                depth: 100,
+                                modifier: 1,
+                                slideShadows: false,
+                            }}
+                            loop={true}
+                            pagination={true}
+                            modules={[EffectCoverflow, Pagination]}
+                            className="mySwiper"
+                        >
+                            {AllHackathon.map((item, index) => (
+                                <SwiperSlide>
+                                    <Card className={`py-2 mb-2 bg-white border border-[#521400]/0.1`}>
+                                        <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
+                                            <p className={`${item.status == 'upcoming' ? "text-yellow-500" : item.status == 'ongoing' ? "text-green-500" : "text-red-500"} uppercase font-bold`}>
+                                                {item.status}
+                                            </p>
+                                            <h4 className="font-bold text-large text-black">{item.title}</h4>
+                                        </CardHeader>
+                                        <CardBody className="overflow-visible py-2">
+                                            <Image
+                                                alt="Card background"
+                                                className="object-cover rounded-xl"
+                                                src={item.image}
+                                                width={270}
+                                                height={240}
+                                            />
+                                        </CardBody>
+                                        <CardFooter className="bg-gray/30 border-t-1 border-zinc-100/50 z-10 flex flex-col items-start">
+                                            <div>
                                                 <div className="flex items-center gap-1">
                                                     <TimeIcon />
-                                                    <span className="text-[10px] font-medium text-[#81819C]">{item.timeStart} - {item.timeEnd}</span>
+                                                    <div>
+                                                        <span className="text-[10px] font-medium text-[#81819C]">{item.timeStart} - {item.timeEnd}</span>
+                                                    </div>
                                                 </div>
-                                                <Button className="text-tiny" color="primary" radius="full" size="sm" onPress={() => joinHackathon(item)}>
-                                                    Join
-                                                </Button>
-                                            </CardFooter>
-                                        </Card>
-                                    </div>
-                                ))}
-                            </Slider>
-                        </div>
+                                                <div className="flex items-center gap-1 mt-1">
+                                                    <ManIcon />
+                                                    <small className="text-[10px] font-medium text-[#81819C]">{item.joining}</small>
+                                                </div>
+                                            </div>
+                                            <Button className="w-full flex justify-center mt-2 text-tiny" color="primary" radius="full" size="sm" onPress={() => joinHackathon(item)}>
+                                                Join
+                                            </Button>
+                                        </CardFooter>
+                                    </Card>
+                                </SwiperSlide>
+                            ))}
+                        </Swiper>
                     </Tab>
                 </Tabs>
                 <Modal
@@ -303,8 +384,8 @@ export default function Hackathon() {
                     <ModalContent>
                         {(onClose) => (
                             <>
-                                <ModalHeader className="flex flex-col gap-1">Leaderboard of {selectedItem.title}</ModalHeader>
-                                <ModalBody>
+                                <ModalHeader className="flex flex-col gap-1 text-white">Leaderboard of {selectedItem.title}</ModalHeader>
+                                <ModalBody className="text-white">
                                     <Leaderboard />
                                 </ModalBody>
                             </>

@@ -4,10 +4,30 @@ import { useSession } from 'next-auth/react';
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure } from "@nextui-org/react";
 import ConvertCoin from '../ConvertCoin';
 import Link from 'next/link';
-import { XMarkIcon } from "@heroicons/react/16/solid";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import ArrowUpIcon from '@/asset/icon/ArrowUpIcon';
+import AptosIcon from '@/asset/icon/AptosIcon';
+import BitcoinIcon from '@/asset/icon/BitcoinIcon';
+import ArrowDownIcon from '@/asset/icon/ArrowDownIcon';
+import { XMarkIcon } from '@heroicons/react/16/solid';
+import LogoIconSmall from '@/asset/icon/LogoSmall';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/pagination';
+import './styles.css';
+import { EffectCoverflow, Pagination } from 'swiper/modules';
+import Header from '../Header';
+
+interface Total {
+  distance: number;
+  hour: number;
+  minute: number;
+  coin: number;
+}
+
 
 export default function Profile() {
   const { data: session } = useSession() || {};
@@ -20,7 +40,7 @@ export default function Profile() {
     price: 100,
   });
   const { isOpen: isNFTOpen, onOpen: onNFTOpen, onClose: onNFTClose } = useDisclosure();
-
+  const [toTal, setTotal] = useState<Total>({ distance: 25.06, hour: 25, minute: 10, coin: 4995 });
   function SampleNextArrow(props: any) {
     const { className, style, onClick } = props;
     return (
@@ -102,8 +122,21 @@ export default function Profile() {
       owner: 'Mike Doe',
       description: 'This is certificate for joining the champions',
       price: 150,
+    },
+    {
+      id: 4,
+      title: 'Race 3: Half Marathon',
+      image: 'https://th.bing.com/th/id/OIP.9epyABsKLdxw0h4-X68oewHaHa?rs=1&pid=ImgDetMain',
+      owner: 'Nhat Nguyen',
+      description: 'This is certificate for joining Half Marathon champion',
+      price: 200,
     }
   ];
+
+  const transactions = [
+    { icon: <AptosIcon />, name: "APT", date: "Aptos", amount: 1000, increase: true },
+    { icon: <BitcoinIcon />, name: "BTC", date: "Bitcoin", amount: 500, increase: false },
+  ]
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const handleOpen = () => {
@@ -113,86 +146,135 @@ export default function Profile() {
   const handleNFTOpen = (nft: any) => {
     // setSelectedNFT(nft);
     // onNFTOpen();
-    window.open(`https://explorer.aptoslabs.com/txn/${nft.tx_hash}?network=testnet`, "_self")
+    var tx_hash = localStorage.getItem('tx_hash');
+    window.open(`https://explorer.aptoslabs.com/txn/${tx_hash}?network=testnet`, "_self")
   }
 
   return (
     <>
-      <div className="bg-background text-primary-foreground min-h-screen">
+      <div className="bg-white text-primary min-h-screen scrollbar-hide overflow-auto">
         <div className="max-w-4xl mx-auto p-4">
-          <div className="absolute top-4 right-4 z-10">
-            <Link href="/" className="text-white hover:text-gray-300">
-              <XMarkIcon className="h-6 w-6" />
-            </Link>
-          </div>
+          <Header />
           <div className="bg-card rounded-lg p-4 mb-4">
-            <div className="flex items-center mb-4">
-              <img className="w-16 h-16 rounded-full mr-4" src={session?.user?.image ?? "/path/to/default/image.jpg"} alt="User Avatar" />
-              <div>
-                <h2 className="text-lg font-bold">{session?.user?.name}</h2>
-                <p className="text-sm text-muted">{session?.user?.email}</p>
+            <div className="card">
+              <h1 className="font-bold">Beginner</h1>
+              <div className="my-1 flex items-center">
+                <LogoIconSmall /><span className="text-[32px] leading-normal font-bold">{toTal.coin}</span>
               </div>
-            </div>
-            <p className="text-sm text-secondary">No pain no gain!</p>
-          </div>
-
-          <div className="bg-card rounded-lg p-4 mt-4">
-            <h2 className="text-lg font-bold mb-2">Balance Information</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              <div className="bg-gray-200 text-gray-800 p-4 rounded-lg">
-                <h3 className="text-lg font-bold mb-1">Total Balance</h3>
-                <p className="text-sm mb-2">100.00$</p>
-              </div>
-              <div className="bg-gray-200 text-gray-800 p-4 rounded-lg">
-                <div className="flex justify-between items-center mb-2">
-                  <h3 className="text-lg font-bold">APT</h3>
-                  <Button className="text-tiny" color="primary" radius="full" size="sm" onPress={() => handleOpen()}>
-                    Convert
-                  </Button>
+              <div className="flex items-center gap-x-6">
+                <div>
+                  <h2 className="text-[10px] font-medium">Total distances</h2>
+                  <div>
+                    <span className="text-xl leading-normal font-bold">{toTal.distance}</span> <span className="text-xs leading-normal">km</span>
+                  </div>
                 </div>
-                <p className="text-sm mb-2">2500</p>
-                <p className="text-sm mb-2">$120</p>
-              </div>
-              <div className="bg-gray-200 text-gray-800 p-4 rounded-lg">
-                <div className="flex justify-between items-center mb-2">
-                  <h3 className="text-lg font-bold">BTC</h3>
-                  <Button className="text-tiny" color="primary" radius="full" size="sm" onPress={() => handleOpen()}>
-                    Convert
-                  </Button>
+                <div>
+                  <h2 className="text-[10px] font-medium">Total time</h2>
+                  <div>
+                    <span className="text-xl leading-normal font-bold">{toTal.hour}</span> <span className="text-xs leading-normal">hrs</span>
+                    {" "}
+                    <span className="text-xl leading-normal font-bold">{toTal.minute}</span> <span className="text-xs leading-normal">min</span>
+                  </div>
                 </div>
-                <p className="text-sm mb-2">0.000128</p>
-                <p className="text-sm mb-2">$1300</p>
               </div>
             </div>
           </div>
 
-          <Slider {...settings}>
-            {ListNFT.map(item => (
-              <div key={item.tx_hash} className="px-2">
-                <Card isFooterBlurred className="py-4">
-                  <CardHeader className="absolute z-10 top-1 flex-col items-start">
-                    <p className="text-tiny text-white/60 uppercase font-bold">{item.owner}</p>
-                    <h4 className="text-gray/60 font-medium text-2xl">{item.title}</h4>
-                  </CardHeader>
-                  <Image
-                    removeWrapper
-                    alt="Card example background"
-                    className="z-0 w-full h-full scale-125 -translate-y-6 object-cover"
-                    src={item.image}
-                  />
-                  <CardFooter className="absolute bg-white/30 bottom-0 border-t-1 border-zinc-100/50 z-10 justify-between">
-                    <div>
-                      <p className="text-black text-tiny">{item.description}</p>
-                      <p className="text-black text-tiny">${item.price}</p>
+          {/* <hr className="border-primary border-t-2 mb-1" /> */}
+
+          <div className="bg-card rounded-lg p-2 mt-2">
+            {/* <div className="flex justify-between items-center">
+              <div className="text-3xl font-bold">1500.00$</div>
+              <div className="text-sm text-gray-500">
+                GOODS: <span className="font-medium">2 TOTAL</span>
+              </div>
+              <Button className="text-white" color="primary" radius="full" size="sm" onPress={() => handleOpen()}>
+                Convert
+              </Button>
+            </div> */}
+            <div className="w-full max-w-md mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
+              <ul className="divide-y divide-gray-200">
+                {transactions.map((transaction, index) => (
+                  <li key={index} className="p-4 flex items-center justify-between group relative">
+                    <div className="flex items-center transition-transform duration-200 ease-out group-hover:-translate-x-2">
+                      <span className="text-2xl mr-3">{transaction.icon}</span>
+                      <div>
+                        <h3 className="text-lg font-semibold">{transaction.name}</h3>
+                        <p className="text-sm text-gray-500">{transaction.date}</p>
+                      </div>
                     </div>
-                    <Button className="text-tiny" color="primary" radius="full" size="sm" onPress={() => handleNFTOpen(item)}>
-                      View NFT
+                    <div className="flex items-center">
+                      <span className={`text-lg font-bold text-black transition-transform duration-200 ease-out group-hover:-translate-x-4`}>
+                        ${transaction.amount.toFixed(2)}
+                      </span>
+                    </div>
+
+                    {/* Convert button, initially hidden, appears from the center bottom */}
+                    <Button
+                      className="text-white bg-primary absolute left-1/2 transform -translate-x-1/2 translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-200"
+                      color="primary"
+                      radius="full"
+                      size="sm"
+                      onPress={() => handleOpen()}
+                    >
+                      Convert
                     </Button>
-                  </CardFooter>
-                </Card>
-              </div>
-            ))}
-          </Slider>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          <div className='mt-3'>
+            <Swiper
+              effect={'coverflow'}
+              grabCursor={true}
+              centeredSlides={true}
+              slidesPerView={'auto'}
+              coverflowEffect={{
+                rotate: 50,
+                stretch: 0,
+                depth: 100,
+                modifier: 1,
+                slideShadows: false,
+              }}
+              pagination={true}
+              loop={true}
+              modules={[EffectCoverflow, Pagination]}
+              className="mySwiper"
+            >
+              {ListNFT.map((item, index) => (
+                <SwiperSlide key={index}>
+                  <Card className={`py-2 bg-white border border-[#521400]/0.1 group relative`}>
+                    <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
+                      <h4 className="font-bold text-large text-black">{item.title}</h4>
+                      <small className="text-default-500">Created by: {item.owner}</small>
+                    </CardHeader>
+                    <CardBody className="overflow-visible py-2">
+                      <Image
+                        alt="Card background"
+                        className="object-cover rounded-xl"
+                        src={item.image}
+                        width={270}
+                      />
+                    </CardBody>
+                    <CardFooter className="bg-white/30 bottom-0 border-t-1 border-zinc-100/50 z-10 flex flex-col items-start">
+                      <div>
+                        <p className="text-black text-tiny">{item.description}</p>
+                        <p className="text-black text-tiny">${item.price}</p>
+                      </div>
+                      {/* Button div initially hidden, appears on card hover */}
+                      <div className="w-full flex justify-center mt-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                        <Button className="text-tiny" color="primary" radius="full" size="sm" onPress={() => handleNFTOpen(item)}>
+                          View NFT
+                        </Button>
+                      </div>
+                    </CardFooter>
+                  </Card>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+
         </div>
       </div>
       <Modal
