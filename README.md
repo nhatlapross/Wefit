@@ -1,36 +1,27 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+ Wefit365
 
-## Getting Started
+Wefit365 is an app designed for fitness enthusiasts who want to track their training progress efficiently and effectively. With a range of standout features, Wefit365 not only helps you monitor daily activities but also offers exciting rewards to keep you motivated.
+## Key Features
+### Login via Google Fit to Track Activities
+Wefit365 integrates seamlessly with Google Fit, allowing users to synchronize physical activity data quickly and conveniently. You can easily log in with your Google Fit account to monitor important metrics like steps taken, distance traveled, calories burned, and heart rate.
 
-First, run the development server:
+### Earn Points Through Physical Activities
+Each time you complete a workout or reach a fitness goal, Wefit365 rewards you with points. These points accumulate over time and can be used to join competitions or redeem rewards within the app.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Visualize Your Workout Progress Through Charts
+Wefit365 provides a feature that displays your training data in clear, visual charts. You can track your fitness progress over time, making it easier to see improvements or adjust your workout plans as needed.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Track Workouts and Earn Membership Badges
+Wefit365 helps you track your workout history and key milestones. Each time you achieve a goal or excel in a certain area, you’ll earn unique membership badges, encouraging you to push harder and achieve more.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Create and Join Competitions
+Wefit365 allows users to create or join various sports competitions with different challenges. These competitions not only offer a fun way to compete with friends but also provide opportunities to prove your abilities and motivation.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Earn Aptos Tokens Through Workouts and Competitions
+One of the most appealing features of Wefit365 is that users can earn Aptos tokens when completing competitions or achieving significant workout milestones. Aptos tokens are a valuable cryptocurrency, and this is Wefit365’s way of encouraging users to maintain a regular fitness routine.
 
-## Learn More
+### Convert Aptos Tokens to Bitcoin
+In addition to accumulating and earning rewards in the form of Aptos tokens, Wefit365 supports the conversion of Aptos tokens to Bitcoin. This gives users more options for using their rewards, increasing the flexibility and value of the tokens they’ve earned.
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Conclusion
+Wefit365 is more than just a regular fitness tracking app—it’s a community for fitness enthusiasts. With standout features like earning points, receiving token rewards, and joining competitions, Wefit365 helps users maintain their workout habits and enjoy valuable rewards. Try Wefit365 today to improve your health and unlock your full potential!
