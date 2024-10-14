@@ -15,7 +15,7 @@ export default function Leaderboard() {
             name: session?.user?.name,
             role: "1909 point",
             team: "500 km",
-            status: "#100",
+            status: 100,
             age: "29",
             avatar: session?.user?.image,
             email: session?.user?.email,
@@ -108,8 +108,8 @@ export default function Leaderboard() {
     }, []);
 
     return (
-        <>
-            <Table aria-label="Example table with custom cells">
+        <div className="w-full max-w-l mx-auto bg-white rounded-lg">
+            {/* <Table aria-label="Example table with custom cells">
                 <TableHeader columns={columns}>
                     {(column) => (
                         <TableColumn key={column.uid} align={column.uid === "actions" ? "center" : "start"}>
@@ -140,7 +140,53 @@ export default function Leaderboard() {
                         </TableRow>
                     )}
                 </TableBody>
-            </Table>
-        </>
+            </Table> */}
+            {users.map((player, index) => (
+                <div key={index} className="flex items-center space-x-2 my-8">
+                    <div className="flex-shrink-0 w-8 h-8">
+                        <div className={`w-full h-full rounded-full flex items-center justify-center ${index < 3 ? 'bg-orange-500 text-white' : 'bg-orange-100 text-orange-500'
+                            }`}>
+                            {player.status}
+                        </div>
+                    </div>
+                    <User
+                        avatarProps={{ radius: "lg", src: player.avatar }}
+                        description={player.email}
+                        name={player.name}
+                    >
+                    </User>
+                    <div className="flex-grow min-w-0">
+                        <p className="font-medium text-orange-500 truncate mx-4"></p>
+                        <p className="text-xs text-orange-300 truncate mx-4"></p>
+                    </div>
+                    <div className="flex-shrink-0 text-right">
+                        <p className="font-bold text-orange-500">{player.role}</p>
+                        <p className="text-xs text-orange-300">{player.team} </p>
+                    </div>
+                </div>
+            ))}
+            <div className="flex items-center space-x-2 my-8 bg-t-primary">
+                <div className="flex-shrink-0 w-8 h-8">
+                    <div className={`w-full h-full rounded-full flex items-center justify-center ${myRanking[0].status < 3 ? 'bg-orange-500 text-white' : 'bg-orange-100 text-orange-500'
+                        }`}>
+                        {myRanking[0].status}
+                    </div>
+                </div>
+                <User
+                    avatarProps={{ radius: "lg", src: myRanking[0].avatar as string }}
+                    description={myRanking[0].email}
+                    name={myRanking[0].name}
+                >
+                </User>
+                <div className="flex-grow min-w-0">
+                    <p className="font-medium text-orange-500 truncate mx-4"></p>
+                    <p className="text-xs text-orange-300 truncate mx-4"></p>
+                </div>
+                <div className="flex-shrink-0 text-right">
+                    <p className="font-bold text-orange-500">{myRanking[0].role}</p>
+                    <p className="text-xs text-orange-300">{myRanking[0].team} </p>
+                </div>
+            </div>
+        </div>
     );
 }

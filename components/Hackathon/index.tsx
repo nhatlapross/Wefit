@@ -384,8 +384,8 @@ export default function Hackathon() {
                     <ModalContent>
                         {(onClose) => (
                             <>
-                                <ModalHeader className="flex flex-col gap-1 text-white">Leaderboard of {selectedItem.title}</ModalHeader>
-                                <ModalBody className="text-white">
+                                <ModalHeader className="flex flex-col gap-1 text-primary bg-white">Leaderboard of {selectedItem.title}</ModalHeader>
+                                <ModalBody className="text-primary bg-white w-full">
                                     <Leaderboard />
                                 </ModalBody>
                             </>

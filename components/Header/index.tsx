@@ -15,7 +15,7 @@ export default function Header() {
 
     return (
         <div className="w-full flex justify-between items-center">
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 text-primary">
                 <Image
                     isZoomed
                     width={60}
@@ -23,7 +23,12 @@ export default function Header() {
                     alt="NextUI Fruit Image with Zoom"
                     src={session?.user?.image ?? "/path/to/default/image.jpg"}
                 />
-                <span className="font-bold">{session?.user?.name}</span>
+                <div>
+                    <span className="font-bold">{session?.user?.name}</span>
+                    <div />
+                    <span>Balance:1000$</span>
+                </div>
+                
             </div>
             <Dropdown className="bg-white text-primary">
                 <DropdownTrigger>
