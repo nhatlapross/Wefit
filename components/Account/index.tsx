@@ -455,11 +455,12 @@ const Account = () => {
                 size="lg"
                 isOpen={isOpen}
                 onClose={onClose}
+                className='bg-white text-primary'
             >
                 <ModalContent>
                     {(onClose) => (
                         <>
-                            <ModalHeader className="flex flex-col gap-1 text-white">New Champion</ModalHeader>
+                            <ModalHeader className="flex flex-col gap-1 text-primary">New Champion</ModalHeader>
                             <ModalBody>
                                 <FormHackathon />
                             </ModalBody>

@@ -183,47 +183,39 @@ export default function Profile() {
           {/* <hr className="border-primary border-t-2 mb-1" /> */}
 
           <div className="bg-card rounded-lg p-2 mt-2">
-            {/* <div className="flex justify-between items-center">
-              <div className="text-3xl font-bold">1500.00$</div>
-              <div className="text-sm text-gray-500">
-                GOODS: <span className="font-medium">2 TOTAL</span>
-              </div>
-              <Button className="text-white" color="primary" radius="full" size="sm" onPress={() => handleOpen()}>
-                Convert
-              </Button>
-            </div> */}
             <div className="w-full max-w-md mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
               <ul className="divide-y divide-gray-200">
                 {transactions.map((transaction, index) => (
                   <li key={index} className="p-4 flex items-center justify-between group relative">
-                    <div className="flex items-center transition-transform duration-200 ease-out group-hover:-translate-x-2">
+                    <div className="flex items-center">
                       <span className="text-2xl mr-3">{transaction.icon}</span>
                       <div>
                         <h3 className="text-lg font-semibold">{transaction.name}</h3>
                         <p className="text-sm text-gray-500">{transaction.date}</p>
                       </div>
                     </div>
-                    <div className="flex items-center">
-                      <span className={`text-lg font-bold text-black transition-transform duration-200 ease-out group-hover:-translate-x-4`}>
+                    <div className="flex flex-col items-end">
+                      <span className="text-lg font-bold text-black mb-2">
                         ${transaction.amount.toFixed(2)}
                       </span>
+                      <div className="overflow-hidden h-0 group-hover:h-8 transition-all duration-300 ease-in-out">
+                        <Button
+                          className="text-white bg-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                          color="primary"
+                          radius="full"
+                          size="sm"
+                          onPress={() => handleOpen()}
+                        >
+                          Convert
+                        </Button>
+                      </div>
                     </div>
-
-                    {/* Convert button, initially hidden, appears from the center bottom */}
-                    <Button
-                      className="text-white bg-primary absolute left-1/2 transform -translate-x-1/2 translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-200"
-                      color="primary"
-                      radius="full"
-                      size="sm"
-                      onPress={() => handleOpen()}
-                    >
-                      Convert
-                    </Button>
                   </li>
                 ))}
               </ul>
             </div>
           </div>
+
           <div className='mt-3'>
             <Swiper
               effect={'coverflow'}

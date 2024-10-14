@@ -4,15 +4,15 @@ import { XMarkIcon } from "@heroicons/react/16/solid";
 
 const Policy = () => {
   return (
-    <div className="bg-gray-900 text-white font-sans leading-normal tracking-normal min-h-screen">
-      <div className="container mx-auto p-8 relative">
+    <div className="bg-white text-primary">
+      <div className="container mx-3 my-3 p-8 relative">
         <div className="flex justify-between items-start mb-6">
           <div>
             <h1 className="text-2xl font-bold">Application Privacy Policy</h1>
             <p className="text-sm">Effective Date: August 17, 2024</p>
           </div>
           <Link href="/" className="text-white hover:text-gray-300">
-            <XMarkIcon className="h-6 w-6" />
+            <XMarkIcon className="h-6 w-6 bg-primary" />
           </Link>
         </div>
 

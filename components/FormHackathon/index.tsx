@@ -47,53 +47,77 @@ export default function FormHackathon() {
         toast.success('Create Hackathon success!');
         // You can use fetch or axios to send dataToSubmit to your server
         registerUser(session?.user?.email)
-        .catch(error => console.error('Claim error:', error));
+            .catch(error => console.error('Claim error:', error));
     };
 
     const handleSubmitTransaction = async () => {
         try {
-          const response = await fetch('/api/submitTransaction', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body:JSON.stringify({ 
-                from: process.env.NEXT_PUBLIC_RAZOR_ADDRESS,
-                to: 'your_receiver_address',
-                amount: 1000000000000000, 
-                memo: 'Hackathon registration fee',
-              }),
+            const response = await fetch('/api/submitTransaction', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    from: process.env.NEXT_PUBLIC_RAZOR_ADDRESS,
+                    to: 'your_receiver_address',
+                    amount: 1000000000000000,
+                    memo: 'Hackathon registration fee',
+                }),
             })
-          
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const data = await response.json();
 
         } catch (err) {
             //error message
         } finally {
             //finally close
         }
-      };
+    };
 
     return (
-        <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-            <Input isRequired
+        <form className="flex flex-col gap-4 bg-white" onSubmit={handleSubmit}>
+            <Input
+                isRequired
                 placeholder="Name of Hackathon"
                 name="name"
                 value={formData.name}
-                onChange={handleChange} />
-            <Input isRequired
+                onChange={handleChange}
+                color="primary"
+                variant="bordered"
+                classNames={{
+                    input: "text-primary",
+                    inputWrapper: "bg-white hover:bg-white group-data-[hover=true]:bg-white",
+                }}
+            />
+            <Input
+                isRequired
                 placeholder="Description"
                 name="description"
                 value={formData.description}
-                onChange={handleChange} />
-            <Input isRequired
+                onChange={handleChange}
+                color="primary"
+                variant="bordered"
+                classNames={{
+                    input: "text-primary",
+                    inputWrapper: "bg-white hover:bg-white group-data-[hover=true]:bg-white",
+                }}
+            />
+            <Input
+                isRequired
                 placeholder="Prize"
                 name="prize"
                 value={formData.prize}
-                onChange={handleChange} />
+                onChange={handleChange}
+                color="primary"
+                variant="bordered"
+                classNames={{
+                    input: "text-primary",
+                    inputWrapper: "bg-white hover:bg-white group-data-[hover=true]:bg-white",
+                }}
+            />
             <div className="w-full max-w-xl flex flex-row gap-4">
                 <DateRangePicker
                     label="Hackathon duration"
@@ -103,15 +127,25 @@ export default function FormHackathon() {
                         start: formData.startDate,
                         end: formData.endDate,
                     }}
+                    color="primary"
+                    variant="flat"
+                    className="bg-white"
+                    classNames={{
+                        base: "bg-white text-primary",
+                        input: "bg-white text-primary",
+                    }}
                 />
             </div>
-            <div className="text-white">
-                <input type="file" onChange={handleFileChange} />
+            <div className="text-primary">
+                <input
+                    type="file"
+                    onChange={handleFileChange}
+                    className="bg-white border-primary text-primary p-2 rounded file:bg-primary file:text-white file:border-0 file:rounded file:px-2 file:py-1 hover:file:bg-primary/90"
+                />
                 {selectedFile && (
                     <Image src={selectedFile} alt="Preview" width={500} height={500} />
                 )}
             </div>
-
             <div className="flex gap-2 justify-end">
                 <Button fullWidth color="primary" type="submit" className="text-white">
                     Create
