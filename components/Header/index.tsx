@@ -4,6 +4,8 @@ import { useSession } from "next-auth/react";
 import { Dropdown, DropdownSection, DropdownTrigger, DropdownMenu, DropdownItem, Avatar, User } from "@nextui-org/react";
 import { useRouter } from "next/router";
 import { signOut } from 'next-auth/react';
+import ProfileIcon from "@/asset/icon/ProfileIcon";
+import LogoutIcon from "@/asset/icon/LogoutIcon";
 
 export default function Header() {
     const { data: session } = useSession() || {};
@@ -22,15 +24,22 @@ export default function Header() {
                     radius="lg"
                     alt="NextUI Fruit Image with Zoom"
                     src={session?.user?.image ?? "/path/to/default/image.jpg"}
+                    onClick={() => router.push('/home')}
                 />
                 <div>
                     <span className="font-bold">{session?.user?.name}</span>
                     <div />
                     <span>Balance:1000$</span>
                 </div>
-                
             </div>
-            <Dropdown className="bg-white text-primary">
+            <div>
+                <Button isIconOnly variant="light" startContent={<ProfileIcon />} onClick={() => router.push('/profile')}>
+                </Button>
+                <Button isIconOnly variant="light" startContent={<LogoutIcon />} onClick={()=>logOut()}>
+                </Button>
+            </div>
+           
+            {/* <Dropdown className="bg-white text-primary">
                 <DropdownTrigger>
                     <Button isIconOnly variant="light" startContent={<ThreeDotIcon />}>
                     </Button>
@@ -78,7 +87,7 @@ export default function Header() {
                         </DropdownItem>
                     </DropdownSection>
                 </DropdownMenu>
-            </Dropdown>
+            </Dropdown> */}
         </div>
     )
 }
