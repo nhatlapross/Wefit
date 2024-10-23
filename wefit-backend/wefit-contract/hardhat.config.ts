@@ -16,7 +16,7 @@ const config: HardhatUserConfig = {
     }
   },
   networks: {
-    XRPL_EVM_Sidechain_Devnet: {
+    xrplEvmTestnet: {
       url: "https://rpc-evm-sidechain.xrpl.org",
       accounts: [process.env.DEV_PRIVATE_KEY || ''],
     },
@@ -27,7 +27,7 @@ const config: HardhatUserConfig = {
     },
     customChains: [
       {
-        network: "XRPL_EVM_Sidechain_Devnet",
+        network: "xrplEvmTestnet",
         chainId: 1440002,
         urls: {
           apiURL: "https://explorer.xrplevm.org/api",
