@@ -10,7 +10,6 @@ const web3 = new Web3(wefitCfg.providerUrl)
 
 
 //contract config 
-const {getNonce} = require('./priceFeed_service')
 const gasPrice = '5000000000'
 const maxErc20GasLimit = 500000
 const challengeAbi = require("../abi/challengeAbi.json");
