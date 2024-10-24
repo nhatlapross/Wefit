@@ -11,7 +11,6 @@ import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 contract WefitNFT is Initializable, ERC1155Upgradeable, OwnableUpgradeable, ERC1155BurnableUpgradeable, ERC1155SupplyUpgradeable {
     /// @custom:oz-upgrades-unsafe-allow constructor
     constructor() {
-        _disableInitializers();
     }
 
     function initialize(address initialOwner) initializer public {
@@ -46,5 +45,10 @@ contract WefitNFT is Initializable, ERC1155Upgradeable, OwnableUpgradeable, ERC1
         override(ERC1155Upgradeable, ERC1155SupplyUpgradeable)
     {
         super._update(from, to, ids, values);
+    }
+
+    // Helper function to generate a sample bytes array
+    function getSampleBytes() public pure returns (bytes memory) {
+        return abi.encode("Sample Data");  // Encode some string data
     }
 }
