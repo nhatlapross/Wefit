@@ -22,13 +22,11 @@ const xrpl = require('xrpl')
 exports.generate_xrp_wallet = async() => {
     const account = "rP7aApVAyf3bjtRVVTixVSHBbU4kpd742k"
 
-    // console.log("Connecting to testnet...")
-    // const client = new xrpl.Client('wss://s.devnet.rippletest.net:51233')
-    // await client.connect()
+    let seed = xrpl.Wallet.generate()
+    // const standby_wallet = xrpl.Wallet.generate
 
-    const standby_wallet = xrpl.Wallet.fromSeed("sEdVd1vJvRcoXCmrx7SwY8g2bhaD35h")
-
-    return standby_wallet.classicAddress       
+    // return standby_wallet.classicAddress       
+    return seed
 }
 
 exports.mint_nft = async() => {
