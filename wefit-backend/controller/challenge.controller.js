@@ -5,7 +5,16 @@ exports.createChallenge = async(req, res, next) =>{
     try {
         let request = {
             challengeId: req.body.challengeId,
-            amount: req.body.amount
+            amount: req.body.amount,
+            date: req.body.date,
+            owner: req.body.owner,
+            challenge_type: req.body.challenge_type,
+            pool_prize: req.body.pool_prize,
+            price: req.body.price,
+            expected_return: req.body.expected_return,
+            expire_date: req.body.expire_date,
+            distance_goal: req.body.distance_goal,
+            participants_limit: req.body.participants_limit
         }
         let resp = await createChallenge(request);
         res.json({
