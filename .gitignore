@@ -1,2 +1,4 @@
 node_modules
 .next
+apt-backend/wefit-contract/build
+wefit-backend/node_modules
