@@ -3,7 +3,7 @@ const challengeController = require('../controller/challenge.controller')
 
 const challengeRouter = express.Router();
 
-challengeRouter.route('/challenge').post(challengeController.createChallenge)
+challengeRouter.route('/').post(challengeController.createChallenge)
 challengeRouter.route('/createChallengeConfig').post(challengeController.createChallengeConfig)
 challengeRouter.route('/withdrawChallenge').post(challengeController.withDrawChallenge)
 

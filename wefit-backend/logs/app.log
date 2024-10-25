@@ -279,3 +279,35 @@ Error: connect ECONNREFUSED 127.0.0.1:6379
 2024-10-24T13:20:09.637Z error: uncaughtException: Redis connection to 127.0.0.1:6379 failed - connect ECONNREFUSED 127.0.0.1:6379
 Error: connect ECONNREFUSED 127.0.0.1:6379
     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1555:16)
+2024-10-25T08:46:57.651Z error: uncaughtException: Cannot find module 'xrpl'
+Require stack:
+- /Users/phamdat/wefit365/Wefit/wefit-backend/service/wallet.service.js
+- /Users/phamdat/wefit365/Wefit/wefit-backend/controller/wallet.controller.js
+- /Users/phamdat/wefit365/Wefit/wefit-backend/routes/wallet.route.js
+- /Users/phamdat/wefit365/Wefit/wefit-backend/routes/index.js
+- /Users/phamdat/wefit365/Wefit/wefit-backend/config/express.js
+- /Users/phamdat/wefit365/Wefit/wefit-backend/index.js
+Error: Cannot find module 'xrpl'
+Require stack:
+- /Users/phamdat/wefit365/Wefit/wefit-backend/service/wallet.service.js
+- /Users/phamdat/wefit365/Wefit/wefit-backend/controller/wallet.controller.js
+- /Users/phamdat/wefit365/Wefit/wefit-backend/routes/wallet.route.js
+- /Users/phamdat/wefit365/Wefit/wefit-backend/routes/index.js
+- /Users/phamdat/wefit365/Wefit/wefit-backend/config/express.js
+- /Users/phamdat/wefit365/Wefit/wefit-backend/index.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1077:15)
+    at Module._load (node:internal/modules/cjs/loader:922:27)
+    at Module.require (node:internal/modules/cjs/loader:1143:19)
+    at require (node:internal/modules/cjs/helpers:119:18)
+    at Object.<anonymous> (/Users/phamdat/wefit365/Wefit/wefit-backend/service/wallet.service.js:20:14)
+    at Module._compile (node:internal/modules/cjs/loader:1256:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1310:10)
+    at Module.load (node:internal/modules/cjs/loader:1119:32)
+    at Module._load (node:internal/modules/cjs/loader:960:12)
+    at Module.require (node:internal/modules/cjs/loader:1143:19)
+    at require (node:internal/modules/cjs/helpers:119:18)
+    at Object.<anonymous> (/Users/phamdat/wefit365/Wefit/wefit-backend/controller/wallet.controller.js:2:31)
+    at Module._compile (node:internal/modules/cjs/loader:1256:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1310:10)
+    at Module.load (node:internal/modules/cjs/loader:1119:32)
+    at Module._load (node:internal/modules/cjs/loader:960:12)

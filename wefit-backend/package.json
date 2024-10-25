@@ -29,6 +29,7 @@
     "web3-eth-contract": "^1.7.3",
     "winston": "^3.7.2",
     "winston-transport-sentry-node": "^2.3.0",
-    "worker-threads": "^1.0.0"
+    "worker-threads": "^1.0.0",
+    "xrpl": "^4.0.0"
   }
 }

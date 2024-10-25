@@ -17,15 +17,15 @@ module.exports = Object.freeze({
   wefitCfg:{
       name: 'wefit',
       network: process.env.WEFIT_NETWORK || 'testnet',
-      contractOwnerPriv: process.env.WEFIT_CONTRACT_OWNER_PRIV || '6ee44874d355c054c138a417c5a725cccf7353460892125e028e60ebc8c77129',
-      contractOwnerAddr: process.env.WEFIT_CONTRACT_OWNER_ADDR || '0xF7FCCFc3DE0789362B5B998782992a27b12040c8',
-      providerUrl: process.env.WEFIT_API_URL || 'http://202.143.111.229:32003/',
+      contractOwnerPriv: process.env.WEFIT_CONTRACT_OWNER_PRIV || 'b5c03e290e78040b117c807f9389eb24b0a02f3005d98d901e9af63aee43ecb5',
+      contractOwnerAddr: process.env.WEFIT_CONTRACT_OWNER_ADDR || '0x90De83FD2cD4D01660cD6909692568a14661CdF1',
+      providerUrl: process.env.WEFIT_API_URL || 'https://rpc-evm-sidechain.xrpl.org',
       wefitTokenAddress: process.env.WEFIT_TOKEN_ADDRESS || '0x63c3A8780860EB632030c0Cfb019544Dc404E635',
       wefitWalletAddress: process.env.WEFIT_WALLET_ADDRESS || '0xF7FCCFc3DE0789362B5B998782992a27b12040c8',
       wefitPriceFeedAddress: process.env.WEFIT_PRICE_FEED_ADDRESS || '0x1e3cfCF52Ae70f160324C9fc5a04365ab4E87ADc',
       wefitAdminAddress: process.env.WEFIT_ADMIN_ADDRESS || '0x07c59A919b64924a9326BB8c44F13c755f54c645',
-      wefitAdminPriv: process.env.WEFIT_ADMIN_PRIV || '0f85f6dd9fdd46321dc5767304d53b073388277080a8c4d50f9295d00d41872b',
-      wefitChallengeAddress: process.env.WEFIT_CHALLENGE_ADDRESS || '0x33754d3C7A25b4F063fa268FB00F3A6e23d30546',
+      wefitAdminPriv: process.env.WEFIT_ADMIN_PRIV || '',
+      wefitChallengeAddress: process.env.WEFIT_CHALLENGE_ADDRESS || '0x95691fD90c9c28898912906C19BCc6569A736762',
       gasPrice: process.env.WEFIT_GAS_PRICE
   },
   contractParams:{
