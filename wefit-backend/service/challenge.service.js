@@ -4,7 +4,6 @@ const HDWalletProvider = require("@truffle/hdwallet-provider");
 const redis = require("redis");
 const {wefitCfg} = require("../config/vars");
 bluebird.promisifyAll(redis);
-const {setAdminToken} = require('./token.service')
 const Web3 = require('web3')
 const web3 = new Web3(wefitCfg.providerUrl)
 
