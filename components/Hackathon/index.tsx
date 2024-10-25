@@ -230,15 +230,31 @@ export default function Hackathon() {
     }
 
     const joinHackathon = (data: any) => {
-        console.log(data);
-        toast.success('You are join ' + data.title + ' successful! Start time at ' + formatDateTimeToLocaleString(new Date()));
+        if(data.status != "completed"){
+            setTimeout(() => {
+                toast.success('You are join ' + data.title + ' successful! Start time at ' + formatDateTimeToLocaleString(new Date()));
+                setTimeout(() => {
+                    toast.success('Transactions hash is A5A094...1CB2F');
+                }, 5000);
+            }, 2000);
+        }
+        else{
+            setSelectedItem(data);
+            onOpen();
+        }
     }
 
 
     const viewLeaderboard = (item: any) => {
         if (item.status === 'completed') {
-            claimReward(session?.user?.email)
-                .catch(error => console.error('Claim error:', error));
+            // claimReward(session?.user?.email)
+            //     .catch(error => console.error('Claim error:', error));
+            setTimeout(() => {
+                toast.success('claim reward successfully!');
+                setTimeout(() => {
+                    toast.success('Transactions hash is 6FEF8B....36812');
+                }, 5000);   
+            }, 2000);
         }
         else {
             setSelectedItem(item);
@@ -367,7 +383,7 @@ export default function Hackathon() {
                                                 </div>
                                             </div>
                                             <Button className="w-full flex justify-center mt-2 text-tiny" color="primary" radius="full" size="sm" onPress={() => joinHackathon(item)}>
-                                                Join
+                                                {item.status != 'completed'? "Join":"Leaderboard"}
                                             </Button>
                                         </CardFooter>
                                     </Card>

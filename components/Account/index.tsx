@@ -154,7 +154,7 @@ const Account = () => {
 
 
             <Hackathon />
-            <Button className="flex justify-center items-center my-1 bg-primary" onPress={onOpen}>New Champion</Button>
+            <Button className="flex justify-center items-center my-1 bg-primary text-white" onPress={onOpen}>New Champion</Button>
             {/* <div className="flex justify-center items-center">
                 <GaugeChart value={5000} maxValue={10000} onClaimSuccess={onClaimSuccess} />
             </div> */}
@@ -455,7 +455,7 @@ const Account = () => {
                 size="lg"
                 isOpen={isOpen}
                 onClose={onClose}
-                className='bg-white text-primary'
+                className='bg-white'
             >
                 <ModalContent>
                     {(onClose) => (

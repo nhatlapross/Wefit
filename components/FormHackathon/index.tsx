@@ -1,17 +1,22 @@
 import React, { useState } from "react";
-import { Input, Button } from "@nextui-org/react";
-import { DateRangePicker } from "@nextui-org/react";
+import { Input, Button, ButtonGroup } from "@nextui-org/react";
+//import { DateRangePicker } from "@nextui-org/react";
 import { parseZonedDateTime } from "@internationalized/date";
 import Image from 'next/image';
 import toast, { Toaster } from 'react-hot-toast';
 import useRegister from '../hooks/useRegister';
 import { useSession } from 'next-auth/react';
+import { Upload } from 'lucide-react';
+
+import DateRangePicker from "../DateTimePicker";
 export default function FormHackathon() {
     const [selectedFile, setSelectedFile] = useState<string | null>(null);
     const [formData, setFormData] = useState({
         name: '',
         description: '',
-        prize: '',
+        prize1: '',
+        prize2: '',
+        prize3: '',
         startDate: parseZonedDateTime("2024-04-01T00:45[America/Los_Angeles]"),
         endDate: parseZonedDateTime("2024-04-08T11:15[America/Los_Angeles]"),
     });
@@ -77,73 +82,85 @@ export default function FormHackathon() {
         }
     };
 
+
     return (
-        <form className="flex flex-col gap-4 bg-white" onSubmit={handleSubmit}>
+        <form className="flex flex-col gap-4 text-gray-700" onSubmit={handleSubmit}>
             <Input
                 isRequired
-                placeholder="Name of Hackathon"
+                label="Name of Hackathon"
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                color="primary"
+                color="default"
                 variant="bordered"
-                classNames={{
-                    input: "text-primary",
-                    inputWrapper: "bg-white hover:bg-white group-data-[hover=true]:bg-white",
-                }}
             />
             <Input
                 isRequired
-                placeholder="Description"
+                label="Description"
                 name="description"
                 value={formData.description}
                 onChange={handleChange}
-                color="primary"
+                color="default"
                 variant="bordered"
-                classNames={{
-                    input: "text-primary",
-                    inputWrapper: "bg-white hover:bg-white group-data-[hover=true]:bg-white",
-                }}
             />
-            <Input
-                isRequired
-                placeholder="Prize"
-                name="prize"
-                value={formData.prize}
-                onChange={handleChange}
-                color="primary"
-                variant="bordered"
-                classNames={{
-                    input: "text-primary",
-                    inputWrapper: "bg-white hover:bg-white group-data-[hover=true]:bg-white",
-                }}
-            />
-            <div className="w-full max-w-xl flex flex-row gap-4">
-                <DateRangePicker
-                    label="Hackathon duration"
-                    hideTimeZone
-                    visibleMonths={2}
-                    defaultValue={{
-                        start: formData.startDate,
-                        end: formData.endDate,
-                    }}
-                    color="primary"
-                    variant="flat"
-                    className="bg-white"
-                    classNames={{
-                        base: "bg-white text-primary",
-                        input: "bg-white text-primary",
-                    }}
+            <div className="flex flex-row gap-4 w-full">
+                <Input
+                    isRequired
+                    label="Top 1"
+                    name="prize1"
+                    value={formData.prize1}
+                    onChange={handleChange}
+                    color="default"
+                    variant="bordered"
+                />
+                <Input
+                    isRequired
+                    label="Top 2"
+                    name="prize1"
+                    value={formData.prize2}
+                    onChange={handleChange}
+                    color="default"
+                    variant="bordered"
+                />
+                <Input
+                    isRequired
+                    label="Top 3"
+                    name="prize1"
+                    value={formData.prize3}
+                    onChange={handleChange}
+                    color="default"
+                    variant="bordered"
                 />
             </div>
-            <div className="text-primary">
+
+            <div className="w-full max-w-xl flex flex-row gap-4">
+                <div key="bordered" className="flex w-full flex-wrap md:flex-nowrap mb-6 md:mb-0 gap-4">
+                    <DateRangePicker />
+                </div>
+            </div>
+            <div className="flex flex-col items-center gap-4">
                 <input
                     type="file"
                     onChange={handleFileChange}
-                    className="bg-white border-primary text-primary p-2 rounded file:bg-primary file:text-white file:border-0 file:rounded file:px-2 file:py-1 hover:file:bg-primary/90"
+                    className="hidden"
+                    id="file-upload"
+                    accept="image/*"
                 />
+                <label htmlFor="file-upload">
+                    <div className="flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary text-white rounded-full cursor-pointer transition-colors duration-200">
+                        <Upload size={18} />
+                        <span>Choose file</span>
+                    </div>
+                </label>
+
                 {selectedFile && (
-                    <Image src={selectedFile} alt="Preview" width={500} height={500} />
+                    <div className="flex justify-center w-full">
+                        <img
+                            src={selectedFile}
+                            alt="Preview"
+                            className="object-cover w-[200px] h-[200px] rounded-lg"
+                        />
+                    </div>
                 )}
             </div>
             <div className="flex gap-2 justify-end">

@@ -28,12 +28,14 @@ module.exports = {
         dark: {
           layout: {}, // dark theme layout tokens
           colors: {
+            default: "#18181b",
             surface: "#010B14",
             primary: "#FF4800",
             secondary: "#FFF0EB",
             white: "#FFFFFF",
             primaryContainer: "#521400",
             primaryText: "#140500",
+           
           },
         },
       },
