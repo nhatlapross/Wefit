@@ -311,3 +311,70 @@ Require stack:
     at Module._extensions..js (node:internal/modules/cjs/loader:1310:10)
     at Module.load (node:internal/modules/cjs/loader:1119:32)
     at Module._load (node:internal/modules/cjs/loader:960:12)
+2024-10-26T01:48:15.770Z info: Get wallet error: 
+2024-10-26T01:48:49.103Z info: Get wallet error: 
+2024-10-26T01:52:05.714Z info: Get wallet error: 
+2024-10-26T01:53:04.583Z info: Get wallet error: 
+2024-10-26T02:17:24.936Z error: uncaughtException: /Users/phamdat/wefit365/Wefit/wefit-backend/abi/nftByteCode.json: Unexpected token f in JSON at position 21
+SyntaxError: /Users/phamdat/wefit365/Wefit/wefit-backend/abi/nftByteCode.json: Unexpected token f in JSON at position 21
+    at parse (<anonymous>)
+    at Module._extensions..json (node:internal/modules/cjs/loader:1324:39)
+    at Module.load (node:internal/modules/cjs/loader:1119:32)
+    at Module._load (node:internal/modules/cjs/loader:960:12)
+    at Module.require (node:internal/modules/cjs/loader:1143:19)
+    at require (node:internal/modules/cjs/helpers:119:18)
+    at Object.<anonymous> (/Users/phamdat/wefit365/Wefit/wefit-backend/service/nft.service.js:8:21)
+    at Module._compile (node:internal/modules/cjs/loader:1256:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1310:10)
+    at Module.load (node:internal/modules/cjs/loader:1119:32)
+    at Module._load (node:internal/modules/cjs/loader:960:12)
+    at Module.require (node:internal/modules/cjs/loader:1143:19)
+    at require (node:internal/modules/cjs/helpers:119:18)
+    at Object.<anonymous> (/Users/phamdat/wefit365/Wefit/wefit-backend/controller/nft.controller.js:3:5)
+    at Module._compile (node:internal/modules/cjs/loader:1256:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1310:10)
+2024-10-26T02:18:13.778Z error: uncaughtException: /Users/phamdat/wefit365/Wefit/wefit-backend/abi/nftByteCode.json: Unexpected end of JSON input
+SyntaxError: /Users/phamdat/wefit365/Wefit/wefit-backend/abi/nftByteCode.json: Unexpected end of JSON input
+    at parse (<anonymous>)
+    at Module._extensions..json (node:internal/modules/cjs/loader:1324:39)
+    at Module.load (node:internal/modules/cjs/loader:1119:32)
+    at Module._load (node:internal/modules/cjs/loader:960:12)
+    at Module.require (node:internal/modules/cjs/loader:1143:19)
+    at require (node:internal/modules/cjs/helpers:119:18)
+    at Object.<anonymous> (/Users/phamdat/wefit365/Wefit/wefit-backend/service/nft.service.js:8:21)
+    at Module._compile (node:internal/modules/cjs/loader:1256:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1310:10)
+    at Module.load (node:internal/modules/cjs/loader:1119:32)
+    at Module._load (node:internal/modules/cjs/loader:960:12)
+    at Module.require (node:internal/modules/cjs/loader:1143:19)
+    at require (node:internal/modules/cjs/helpers:119:18)
+    at Object.<anonymous> (/Users/phamdat/wefit365/Wefit/wefit-backend/controller/nft.controller.js:3:5)
+    at Module._compile (node:internal/modules/cjs/loader:1256:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1310:10)
+2024-10-26T02:18:32.729Z error: uncaughtException: Could not create addresses from your mnemonic or private key(s). Please check that your inputs are correct.
+Error: Could not create addresses from your mnemonic or private key(s). Please check that your inputs are correct.
+    at new HDWalletProvider (/Users/phamdat/wefit365/Wefit/wefit-backend/node_modules/@truffle/hdwallet-provider/dist/index.js:114:19)
+    at Object.<anonymous> (/Users/phamdat/wefit365/Wefit/wefit-backend/utils/provider.js:11:25)
+    at Module._compile (node:internal/modules/cjs/loader:1256:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1310:10)
+    at Module.load (node:internal/modules/cjs/loader:1119:32)
+    at Module._load (node:internal/modules/cjs/loader:960:12)
+    at Module.require (node:internal/modules/cjs/loader:1143:19)
+    at require (node:internal/modules/cjs/helpers:119:18)
+    at Object.<anonymous> (/Users/phamdat/wefit365/Wefit/wefit-backend/service/nft.service.js:9:38)
+    at Module._compile (node:internal/modules/cjs/loader:1256:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1310:10)
+    at Module.load (node:internal/modules/cjs/loader:1119:32)
+    at Module._load (node:internal/modules/cjs/loader:960:12)
+    at Module.require (node:internal/modules/cjs/loader:1143:19)
+    at require (node:internal/modules/cjs/helpers:119:18)
+    at Object.<anonymous> (/Users/phamdat/wefit365/Wefit/wefit-backend/controller/nft.controller.js:3:5)
+2024-10-26T02:22:05.639Z info: Create order error: 
+2024-10-26T02:22:29.501Z info: Create order error: 
+2024-10-26T02:22:59.365Z info: Create order error: 
+2024-10-26T02:23:44.410Z info: Create order error: 
+2024-10-26T02:24:02.948Z info: Create order error: 
+2024-10-26T02:24:39.675Z info: Create order error: 
+2024-10-26T02:25:16.879Z info: Create order error: 
+2024-10-26T02:25:21.121Z info: Create order error: 
+2024-10-26T02:57:29.106Z info: Create order error: 

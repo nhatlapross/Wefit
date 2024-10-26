@@ -22,11 +22,11 @@ module.exports = Object.freeze({
       providerUrl: process.env.WEFIT_API_URL || 'https://rpc-evm-sidechain.xrpl.org',
       wefitTokenAddress: process.env.WEFIT_TOKEN_ADDRESS || '0x63c3A8780860EB632030c0Cfb019544Dc404E635',
       wefitWalletAddress: process.env.WEFIT_WALLET_ADDRESS || '0xF7FCCFc3DE0789362B5B998782992a27b12040c8',
-      wefitPriceFeedAddress: process.env.WEFIT_PRICE_FEED_ADDRESS || '0x1e3cfCF52Ae70f160324C9fc5a04365ab4E87ADc',
       wefitAdminAddress: process.env.WEFIT_ADMIN_ADDRESS || '0x07c59A919b64924a9326BB8c44F13c755f54c645',
       wefitAdminPriv: process.env.WEFIT_ADMIN_PRIV || '',
+      gasPrice: process.env.WEFIT_GAS_PRICE,
       wefitChallengeAddress: process.env.WEFIT_CHALLENGE_ADDRESS || '0x95691fD90c9c28898912906C19BCc6569A736762',
-      gasPrice: process.env.WEFIT_GAS_PRICE
+      wefitNFTAddress: process.env.WEFIT_NFT_ADDRESS || '0x0A0C45eEA92e2eB06F318Db0761C700D42a65DE6',
   },
   contractParams:{
     from    : process.env.WEFIT_CONTRACT_OWNER_ADDR || '0xF7FCCFc3DE0789362B5B998782992a27b12040c8',

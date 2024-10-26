@@ -1,20 +1,87 @@
-// const Contract = require('web3-eth-contract');
-// const bluebird = require('bluebird'); // eslint-disable-line no-global-assign
-// const redis = require("redis");
-// const Web3 = require('web3')
-// const {redisUrl, wefitCfg, contractParams} = require("../config/vars");
-// let redisClient = redis.createClient(redisUrl);
-// bluebird.promisifyAll(redis);
+const redis = require("redis");
+const {redisUrl, wefitCfg, contractParams} = require("../config/vars");
 
 // //contract config 
-// const {setAdminToken} = require('./token.service')
-// const orderAbi = require("../abi/orderAbi.json");
-// const orderByteCode = require('../abi/orderByteCode.json');
+// const nftAbi = require("../abi/nftAbi.json");
+// const Contract = require('web3-eth-contract');
+// const Web3 = require('web3')
+// const nftByteCode = require('../abi/nftByteCode.json');
 // const {provider, contractProvider} = require('../utils/provider')
 
 // const web3 = new Web3(wefitCfg.providerUrl)
 
 // Contract.setProvider(provider)
+
+const xrpl = require('xrpl')
+
+exports.mint_nft = async(req) => {
+    const wallet = req.xrp_wallet
+
+    // Connect to a testnet node
+    console.log("Connecting to testnet...")
+    const client = new xrpl.Client('wss://s.devnet.rippletest.net:51233')
+    await client.connect()
+
+    const standby_wallet = xrpl.Wallet.fromSeed("sEdVd1vJvRcoXCmrx7SwY8g2bhaD35h")
+    const transactionJson = {
+        "TransactionType": "NFTokenMint",
+        "Account":standby_wallet.classicAddress,
+        "URI": xrpl.convertStringToHex("x.com"),
+        "Flags": parseInt("1"),
+        "TransferFee": parseInt("0"),
+        "NFTokenTaxon": 0 //Required, but if you have no use for it, set to zero.
+      }
+    
+    // ----------------------------------------------------- Submit signed blob 
+    const tx = await client.submitAndWait(transactionJson, { wallet: standby_wallet} )
+    const nfts = await client.request({
+        method: "account_nfts",
+        account: standby_wallet.classicAddress
+    })
+
+    // ------------------------------------------------------- Report results
+    results = '\n\nTransaction result: '+ tx.result.meta.TransactionResult
+    results += '\n\nnfts: ' + JSON.stringify(nfts, null, 2)
+
+    console.log("NFT creating resp: ", results)
+   
+    await client.disconnect()
+    
+    return {
+        "tx": tx.result.meta.TransactionResult,
+        "nfts": nfts.result.account_nfts[0]
+    }
+}
+
+exports.claim_profit = async(req) =>{
+    console.log("Connecting to testnet...")
+    const client = new xrpl.Client('wss://s.devnet.rippletest.net:51233')
+    await client.connect()
+        
+    const standby_wallet = xrpl.Wallet.fromSeed("sEdVd1vJvRcoXCmrx7SwY8g2bhaD35h")
+    const operational_wallet = xrpl.Wallet.fromSeed("sEdVd1vJvRcoXCmrx7SwY8g2bhaD35h")
+    const sendAmount = req.amount
+            
+    // -------------------------------------------------------- Prepare transaction
+    const prepared = await client.autofill({
+        "TransactionType": "Payment",
+        "Account": standby_wallet.address,
+        "Amount": xrpl.xrpToDrops(sendAmount),
+        "Destination": operational_wallet.classicAddress
+    })
+        
+    // ------------------------------------------------- Sign prepared instructions
+    const signed = standby_wallet.sign(prepared)
+    
+    // -------------------------------------------------------- Submit signed blob
+    const tx = await client.submitAndWait(signed.tx_blob)
+        
+    // standbyBalanceField.value =  (await client.getXrpBalance(standby_wallet.address))
+    // operationalBalanceField.value = (await client.getXrpBalance(operational_wallet.address))                 
+    client.disconnect()    
+
+    return tx.result;
+}
 
 // const depositOrder = async(req) =>{
 //     let contract = new contractProvider(orderAbi, req.orderContractAddress)
@@ -27,7 +94,8 @@
 //     }
 // }
 
-// exports.createOrder = async (req) =>{
+
+// exports.publish_nft_contract = async (req) =>{
 //     // let contract = new Contract(orderAbi, orderContractAddress);
 //     //set key - orderaddress 
 //     let deployContract = new web3.eth.Contract(orderAbi)
@@ -76,18 +144,6 @@
 //     let receipt = await redisClient.zadd(req.challengeId, req.score, JSON.stringify(orderInfo));
 //     return receipt
 // }
-
-// exports.setPriceOrder = async (req) => {
-//     let orderContract = new Contract(orderAbi, req.orderContractAddress);
-//     let nonce = await getNonce(wefitCfg.contractOwnerAddr)
-//     try {
-//         let receipt = await orderContract.methods.setPriceOrder(req.price, req.symbol).send(Object.assign(contractParams, {nonce: nonce}));
-//         return receipt
-//     } catch (err) {
-//         return err.message
-//     }
-// }
-
 // exports.scanPendingOrder = async (req) =>{
 //     let listOrder = await redisClient.zrangeAsync(req, 0, -1);
 //     return listOrder
@@ -98,28 +154,6 @@
 //     let nonce = await getNonce(req.adminAddress)
 //     try {
 //         let receipt = await orderContract.methods.addWhiteListAddress(req.adminAddress).send(Object.assign(contractParams, {nonce: nonce}))
-//         return receipt
-//     } catch (err) {
-//         return err.message
-//     }
-// }
-
-// exports.claimProfit = async(req) =>{
-//     let orderContract = new contractProvider(orderAbi, req.orderContractAddress)
-//     let nonce = await getNonce(wefitCfg.contractOwnerAddr)
-//     try {
-//         let receipt = await orderContract.methods.claimProfit(req.sender, req.amount).send(Object.assign(contractParams, {nonce: nonce}))
-//         return receipt
-//     } catch (err) {
-//         return err.message
-//     }
-// }
-
-// exports.payToPool = async(req) =>{
-//     let orderContract = new contractProvider(orderAbi, req.orderContractAddress)
-//     let nonce = await getNonce(wefitCfg.contractOwnerAddr)
-//     try {
-//         let receipt = await orderContract.methods.payToPool(req.amount).send(Object.assign(contractParams, {nonce: nonce}))
 //         return receipt
 //     } catch (err) {
 //         return err.message
