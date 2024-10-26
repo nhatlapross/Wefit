@@ -152,7 +152,7 @@ const ConvertCoin = () => {
                                 type="text"
                                 value={sellAmount.toString()}
                                 onChange={(e) => changeFrom(e.target.value)}
-                                className="w-full"
+                                className="w-full bg-gray-100 text-gray-700 rounded-md"
                                 max={5000}
                                 endContent={
                                     <h4>APT</h4>
@@ -172,7 +172,7 @@ const ConvertCoin = () => {
                             <Input
                                 type="text"
                                 value={buyAmount.toString()}
-                                className="w-full"
+                                className="w-full bg-gray-100 text-gray-700 rounded-md"
                                 endContent={
                                     <h4>ckBTC</h4>
                                 }
