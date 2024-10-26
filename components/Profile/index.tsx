@@ -274,7 +274,7 @@ export default function Profile() {
         isOpen={isOpen}
         onClose={onClose}
       >
-        <ModalContent>
+        <ModalContent className="bg-white text-black">
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1">Convert Assets</ModalHeader>

@@ -35,8 +35,13 @@ const ConvertCoin = () => {
     const [buyCoin, setBuyCoin] = useState("bitcoin");
     const [coinPrices, setCoinPrices] = useState({});
 
+   
     function formatDateTimeToLocaleString(date: Date): string {
-        return date.toLocaleString('en-GB'); // Adjust locale as needed
+        return date.toLocaleDateString('en-GB', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+        }); // Adjust locale as needed
     }
     
     const [rows, setRows] = useState( [
@@ -138,7 +143,7 @@ const ConvertCoin = () => {
                     <XMarkIcon className="h-6 w-6" />
                 </Link>
             </div> */}
-            <Card className="w-full max-w-md mx-auto">
+            <Card className="w-full max-w-md mx-auto bg-white text-grey">
                 <CardBody className="p-6">
                     <div className="space-y-4">
                         <div>
@@ -175,25 +180,25 @@ const ConvertCoin = () => {
                             <p className="text-sm text-gray-500 mt-1">$56,678.73</p>
                         </div>
 
-                        <Button color="primary" className="w-full mt-3" onClick={()=> swap()}>
+                        <Button color="primary" className="w-full mt-3 uppercase text-white"  onClick={()=> swap()}>
                             swap
                         </Button>
                     </div>
                 </CardBody>
             </Card>
-            <div className='mt-2 w-full overflow-x-auto'>
-                <Table aria-label="Swap history table"
-                    className="w-full min-w-full">
-                    <TableHeader columns={columns}>
-                        {(column) => <TableColumn key={column.key}>{column.label}</TableColumn>}
+            <div className='mt-2 w-full overflow-x-auto bg-white custom-table bg-white shadow-medium' style={{ borderRadius: 8 }}>
+                <Table removeWrapper aria-label="Swap history table"
+                    className="w-full min-w-full" style={{ background: "white" }}>
+                    <TableHeader columns={columns} className='bg-white text-xs'>
+                        {(column) => <TableColumn key={column.key} className='text-center'>{column.label}</TableColumn>}
                     </TableHeader>
-                    <TableBody items={rows}>
+                    <TableBody items={rows} className='bg-white'>
                         {(item) => (
                             <TableRow>
-                                <TableCell>{item.date}</TableCell>
-                                <TableCell>{item.amountAPT}</TableCell>
-                                <TableCell>{item.amountBTC}</TableCell>
-                                <TableCell>{item.status}</TableCell>
+                                <TableCell className='text-center'>{item.date}</TableCell>
+                                <TableCell className='text-center'>{parseFloat(item.amountAPT.toFixed(4))}</TableCell> 
+                                <TableCell className='text-center'>{parseFloat(item.amountBTC.toFixed(4))}</TableCell> 
+                                <TableCell className='text-center'>{item.status}</TableCell>
                             </TableRow>
                         )}
                     </TableBody>
