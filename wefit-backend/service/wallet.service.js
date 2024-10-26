@@ -18,17 +18,32 @@
 // }
 
 const xrpl = require('xrpl')
+const { ethers } = require('ethers');
 
-exports.generate_xrp_wallet = async() => {
+exports.generate_xrp_wallet = async(req) => {
     const account = "rP7aApVAyf3bjtRVVTixVSHBbU4kpd742k"
 
-    // console.log("Connecting to testnet...")
-    // const client = new xrpl.Client('wss://s.devnet.rippletest.net:51233')
-    // await client.connect()
+    let seed = xrpl.Wallet.generate()
+    // const standby_wallet = xrpl.Wallet.generate
 
-    const standby_wallet = xrpl.Wallet.fromSeed("sEdVd1vJvRcoXCmrx7SwY8g2bhaD35h")
+    // return standby_wallet.classicAddress       
+    return seed.classicAddress
+}
 
-    return standby_wallet.classicAddress       
+exports.generate_evm_wallet = async(req) =>{
+    let mnemonic = "pqd pn2411 pqd_pn";
+    const wallet = ethers.Wallet.createRandom();
+    let resp = {
+        address: wallet.address,
+        // privateKey: wallet.privateKey,
+        publicKey: wallet.publicKey,
+        mnemonic: mnemonic,
+        path: "m/44'/60'/0'/0/0"
+    }
+    
+    console.log("Wallet resp: ", resp)
+
+    return resp.address;
 }
 
 exports.mint_nft = async() => {
