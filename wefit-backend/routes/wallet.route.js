@@ -3,6 +3,6 @@ const walletController = require("../controller/wallet.controller")
 
 const walletRouter = express.Router();
 
-walletRouter.route('/').get(walletController.get_xrp_wallet);
+walletRouter.route('/').post(walletController.get_xrp_wallet);
 
 module.exports = walletRouter;
