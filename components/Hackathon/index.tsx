@@ -246,6 +246,14 @@ export default function Hackathon() {
     //         onOpen();
     //     }
     // }
+    function getFirstAndLastFourChars(str: string): string {
+        if (str.length <= 8) {
+          return str; // If the string is too short, return it as is
+        }
+        const firstFour = str.slice(0, 4);
+        const lastFour = str.slice(-4);
+        return `${firstFour}...${lastFour}`;
+      }  
 
     const handleMintNFT = async (data:any) => {
         console.log(data);
@@ -258,7 +266,7 @@ export default function Hackathon() {
             challengeId: data.id
           });
           console.log(result);
-          toast.success('NFT id:\n'+result?.data?.nfts?.NFTokenID, {
+          toast.success('NFT id:\n'+getFirstAndLastFourChars(result?.data?.nfts?.NFTokenID as string), {
             duration: 5000,
           });
           setIsSubmitting(false);

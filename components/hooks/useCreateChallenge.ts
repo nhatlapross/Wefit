@@ -37,7 +37,14 @@ interface CreateChallengeProps {
 const useCreateChallenge = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
+  function getFirstAndLastFourChars(str: string): string {
+    if (str.length <= 8) {
+      return str; // If the string is too short, return it as is
+    }
+    const firstFour = str.slice(0, 4);
+    const lastFour = str.slice(-4);
+    return `${firstFour}...${lastFour}`;
+  }  
   const Challange = useCallback(async (req: CreateChallengeProps): Promise<MintNFTRes | null> => {
     console.log('Create challenge for ', req.owner); // Debug log
     setIsLoading(true);
@@ -80,8 +87,8 @@ const useCreateChallenge = () => {
       console.log(response);
       console.log(data);
       toast.success('Create challenge successfully!');
-      toast.success('Transaction hash:\n'+data.data.transactionHash);
-
+      toast.success('Transaction hash:\n'+getFirstAndLastFourChars(data.data.transactionHash));
+      localStorage.setItem('tx_hash',data.data.transactionHash)
       return data;
     } catch (err: any) {
       const errorMessage = err.message || 'An error occurred while create Challenge';

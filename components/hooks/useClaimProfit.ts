@@ -25,7 +25,14 @@ interface ClaimProfitProps {
 const useClaimProfit = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
+  function getFirstAndLastFourChars(str: string): string {
+    if (str.length <= 8) {
+      return str; // If the string is too short, return it as is
+    }
+    const firstFour = str.slice(0, 4);
+    const lastFour = str.slice(-4);
+    return `${firstFour}...${lastFour}`;
+  }  
   const Profit = useCallback(async (req: ClaimProfitProps): Promise<MintNFTRes | null> => {
     console.log('Minting NFT for email:', req.email); // Debug log
     setIsLoading(true);

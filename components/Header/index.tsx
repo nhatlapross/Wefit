@@ -14,7 +14,14 @@ import useMintNFT from "../hooks/useMintNFT";
 
 export default function Header() {
     const { data: session } = useSession() || {};
-
+    function getFirstAndLastFourChars(str: string): string {
+        if (str.length <= 8) {
+          return str; // If the string is too short, return it as is
+        }
+        const firstFour = str.slice(0, 4);
+        const lastFour = str.slice(-4);
+        return `${firstFour}...${lastFour}`;
+      }  
     const { walletAddress } = useGenerate();
     const [generatedWallet, setGeneratedWallet] = useState(null);
 
@@ -42,10 +49,10 @@ export default function Header() {
                 localStorage.setItem('xrp_wallet', wallet.xrp_wallet);
 
                 setTimeout(() => {
-                    toast.success('Your evm Wallet address: ' + wallet.evm_wallet, {
+                    toast.success('Your evm Wallet address: ' + getFirstAndLastFourChars(wallet.evm_wallet), {
                         duration: 5000,
                     });
-                    toast.success('Your xrp Wallet address: ' + wallet.xrp_wallet, {
+                    toast.success('Your xrp Wallet address: ' + getFirstAndLastFourChars(wallet.xrp_wallet), {
                         duration: 5000,
                     });
                 }, 4000);
@@ -54,25 +61,6 @@ export default function Header() {
             console.error('Error generating wallet:', error);
         }
     };
-
-    const { NFT } = useMintNFT();
-
-    const handleMintNFT = async () => {
-        let xpr_address = localStorage.getItem('xrp_wallet');
-        try {
-          const result = await NFT({
-            email: session?.user?.email as string,
-            xrp_wallet: xpr_address as string,
-            challengeId: 123
-          });
-          console.log(result);
-          toast.success('NFT id:\n'+result?.data?.nfts?.NFTokenID, {
-            duration: 5000,
-          });
-        } catch (error) {
-          console.error(error);
-        }
-      };
 
     return (
         <div className="w-full flex justify-between items-center">
@@ -92,8 +80,8 @@ export default function Header() {
                 </div>
             </div>
             <div>
-                <Button isIconOnly variant="light" startContent={<ArrowBigDown />} onClick={() => handleMintNFT()}>
-                </Button>
+                {/* <Button isIconOnly variant="light" startContent={<ArrowBigDown />} onClick={() => handleMintNFT()}>
+                </Button> */}
                 <Button isIconOnly variant="light" startContent={<ProfileIcon />} onClick={() => router.push('/profile')}>
                 </Button>
                 <Button isIconOnly variant="light" startContent={<LogoutIcon />} onClick={() => logOut()}>

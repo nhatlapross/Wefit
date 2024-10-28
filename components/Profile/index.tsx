@@ -148,7 +148,7 @@ export default function Profile() {
     // setSelectedNFT(nft);
     // onNFTOpen();
     var tx_hash = localStorage.getItem('tx_hash');
-    window.open(`https://explorer.aptoslabs.com/txn/${tx_hash}?network=testnet`, "_self")
+    window.open(`https://explorer.xrplevm.org/tx/${tx_hash}`, "_self")
   }
 
   return (
