@@ -378,3 +378,29 @@ Error: Could not create addresses from your mnemonic or private key(s). Please c
 2024-10-26T02:25:16.879Z info: Create order error: 
 2024-10-26T02:25:21.121Z info: Create order error: 
 2024-10-26T02:57:29.106Z info: Create order error: 
+2024-10-27T01:50:26.054Z error: uncaughtException: PollingBlockTracker - encountered an error while attempting to update latest block:
+Error: ETIMEDOUT
+    at Timeout.<anonymous> (F:\Aptos\Wefit\wefit-backend\node_modules\request\request.js:848:19)
+    at listOnTimeout (node:internal/timers:569:17)
+    at process.processTimers (node:internal/timers:512:7)
+Error: PollingBlockTracker - encountered an error while attempting to update latest block:
+Error: ETIMEDOUT
+    at Timeout.<anonymous> (F:\Aptos\Wefit\wefit-backend\node_modules\request\request.js:848:19)
+    at listOnTimeout (node:internal/timers:569:17)
+    at process.processTimers (node:internal/timers:512:7)
+    at PollingBlockTracker._performSync (F:\Aptos\Wefit\wefit-backend\node_modules\eth-block-tracker\src\polling.js:51:24)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2024-10-27T13:48:40.653Z error: uncaughtException: PollingBlockTracker - encountered an error while attempting to update latest block:
+Error: getaddrinfo ENOTFOUND rpc-evm-sidechain.xrpl.org
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26)
+Error: PollingBlockTracker - encountered an error while attempting to update latest block:
+Error: getaddrinfo ENOTFOUND rpc-evm-sidechain.xrpl.org
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26)
+    at PollingBlockTracker._performSync (F:\Aptos\Wefit\wefit-backend\node_modules\eth-block-tracker\src\polling.js:51:24)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2024-10-28T13:20:17.020Z info: Create challenge error: 
+2024-10-28T13:27:40.792Z info: Create challenge error: 
+2024-10-28T13:27:46.173Z info: Create challenge error: 
+2024-10-28T13:27:53.704Z info: Create challenge error: 
+2024-10-28T13:28:15.066Z info: Create challenge error: 
+2024-10-28T13:31:07.188Z info: Create challenge error: 

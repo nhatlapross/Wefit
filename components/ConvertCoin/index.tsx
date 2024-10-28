@@ -186,7 +186,7 @@ const ConvertCoin = () => {
                     </div>
                 </CardBody>
             </Card>
-            <div className='mt-2 w-full overflow-x-auto bg-white custom-table bg-white shadow-medium' style={{ borderRadius: 8 }}>
+            <div className='mt-6 w-full overflow-x-auto custom-table bg-white shadow-medium' style={{ borderRadius: 8 }}>
                 <Table removeWrapper aria-label="Swap history table"
                     className="w-full min-w-full" style={{ background: "white" }}>
                     <TableHeader columns={columns} className='bg-white text-xs'>

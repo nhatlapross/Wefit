@@ -4,6 +4,7 @@ const {generate_xrp_wallet, generate_evm_wallet} = require('../service/wallet.se
 exports.get_xrp_wallet = async(req, res, next) =>{
     try {       
         let email = req.body.email
+        console.log('email:',email);
         let evm_wallet = await generate_evm_wallet(req);
         let xrp_wallet = await generate_xrp_wallet(req);
 

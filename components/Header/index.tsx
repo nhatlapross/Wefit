@@ -6,14 +6,73 @@ import { useRouter } from "next/router";
 import { signOut } from 'next-auth/react';
 import ProfileIcon from "@/asset/icon/ProfileIcon";
 import LogoutIcon from "@/asset/icon/LogoutIcon";
+import { useEffect, useState } from "react";
+import { ArrowBigDown } from "lucide-react";
+import useGenerate from '../hooks/useGenerate';
+import { Toaster, toast } from 'react-hot-toast';
+import useMintNFT from "../hooks/useMintNFT";
 
 export default function Header() {
     const { data: session } = useSession() || {};
+
+    const { walletAddress } = useGenerate();
+    const [generatedWallet, setGeneratedWallet] = useState(null);
+
     const router = useRouter();
     const logOut = () => {
         // Sign out and redirect to home page
+        localStorage.setItem('evm_wallet', '');
+        localStorage.setItem('xrp_wallet', '');
         signOut({ callbackUrl: '/' });  // Redirect to home page after logout
     }
+
+    useEffect(() => {
+        let evm_wallet = localStorage.getItem('evm_wallet');
+        if (session?.user?.email && (evm_wallet == "" || evm_wallet == null)) {
+            handleGenerateWallet();
+        }
+    }, []);
+
+    const handleGenerateWallet = async () => {
+        try {
+            const wallet = await walletAddress(session?.user?.email as string);
+            if (wallet) {
+                console.log(wallet);
+                localStorage.setItem('evm_wallet', wallet.evm_wallet);
+                localStorage.setItem('xrp_wallet', wallet.xrp_wallet);
+
+                setTimeout(() => {
+                    toast.success('Your evm Wallet address: ' + wallet.evm_wallet, {
+                        duration: 5000,
+                    });
+                    toast.success('Your xrp Wallet address: ' + wallet.xrp_wallet, {
+                        duration: 5000,
+                    });
+                }, 4000);
+            }
+        } catch (error) {
+            console.error('Error generating wallet:', error);
+        }
+    };
+
+    const { NFT } = useMintNFT();
+
+    const handleMintNFT = async () => {
+        let xpr_address = localStorage.getItem('xrp_wallet');
+        try {
+          const result = await NFT({
+            email: session?.user?.email as string,
+            xrp_wallet: xpr_address as string,
+            challengeId: 123
+          });
+          console.log(result);
+          toast.success('NFT id:\n'+result?.data?.nfts?.NFTokenID, {
+            duration: 5000,
+          });
+        } catch (error) {
+          console.error(error);
+        }
+      };
 
     return (
         <div className="w-full flex justify-between items-center">
@@ -33,12 +92,14 @@ export default function Header() {
                 </div>
             </div>
             <div>
+                <Button isIconOnly variant="light" startContent={<ArrowBigDown />} onClick={() => handleMintNFT()}>
+                </Button>
                 <Button isIconOnly variant="light" startContent={<ProfileIcon />} onClick={() => router.push('/profile')}>
                 </Button>
-                <Button isIconOnly variant="light" startContent={<LogoutIcon />} onClick={()=>logOut()}>
+                <Button isIconOnly variant="light" startContent={<LogoutIcon />} onClick={() => logOut()}>
                 </Button>
             </div>
-           
+
             {/* <Dropdown className="bg-white text-primary">
                 <DropdownTrigger>
                     <Button isIconOnly variant="light" startContent={<ThreeDotIcon />}>

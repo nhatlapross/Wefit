@@ -20,6 +20,7 @@ import 'swiper/css/pagination';
 import './styles.css';
 import { EffectCoverflow, Pagination } from 'swiper/modules';
 import Header from '../Header';
+import XRPIcon from '@/asset/icon/XRPIcon';
 
 interface Total {
   distance: number;
@@ -134,7 +135,7 @@ export default function Profile() {
   ];
 
   const transactions = [
-    { icon: <AptosIcon />, name: "APT", date: "Aptos", amount: 1000, increase: true },
+    { icon: <XRPIcon />, name: "XRP", date: "XRP", amount: 1000, increase: true },
     { icon: <BitcoinIcon />, name: "BTC", date: "Bitcoin", amount: 500, increase: false },
   ]
 
@@ -277,7 +278,7 @@ export default function Profile() {
         <ModalContent className="bg-white text-black">
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">Convert Assets</ModalHeader>
+              <ModalHeader className="flex flex-col gap-1 text-primary">Convert Assets</ModalHeader>
               <ModalBody>
                 <ConvertCoin />
               </ModalBody>

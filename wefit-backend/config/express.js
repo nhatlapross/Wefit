@@ -41,7 +41,12 @@ app.use(methodOverride());
 app.use(helmet());
 
 // enable CORS - Cross Origin Resource Sharing
-app.use(cors());
+app.use(cors({
+  origin: process.env.NEXT_PUBLIC_FRONTEND_URL || 'http://localhost:3000', // Your frontend URL
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+}));
 
 // mount api v1 routes
 app.use('/v1', apiRoutes);

@@ -11,7 +11,6 @@ import { ChevronIcon } from "@/asset/icon/ChevronIcon";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import useClaim from '../hooks/useClaim';
 
 import { useSession } from 'next-auth/react';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -23,7 +22,9 @@ import './styles.css';
 import { EffectCoverflow, Pagination } from 'swiper/modules';
 import DollarIcon from "@/asset/icon/DollarIcon";
 import ManIcon from "@/asset/icon/ManIcon";
-
+import LoadingForm from "../LoadingForm";
+import useMintNFT from "../hooks/useMintNFT";
+import useClaimProfit from "../hooks/useClaimProfit";
 
 interface IMyHackathon {
     id: number;
@@ -37,9 +38,11 @@ interface IMyHackathon {
 
 export default function Hackathon() {
     const [selected, setSelected] = useState("allHackathon");
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const { isOpen, onOpen, onClose } = useDisclosure();
     const { data: session } = useSession() || {};
-    const { claim: claimReward, isLoading: isClaimLoading } = useClaim();
+    const { NFT } = useMintNFT();
+    const { Profit } = useClaimProfit();
 
     const [selectedItem, setSelectedItem] = useState<IMyHackathon>({
         id: 1,
@@ -229,32 +232,72 @@ export default function Hackathon() {
         return date.toLocaleString('en-GB'); // Adjust locale as needed
     }
 
-    const joinHackathon = (data: any) => {
-        if(data.status != "completed"){
-            setTimeout(() => {
-                toast.success('You are join ' + data.title + ' successful! Start time at ' + formatDateTimeToLocaleString(new Date()));
-                setTimeout(() => {
-                    toast.success('Transactions hash is A5A094...1CB2F');
-                }, 5000);
-            }, 2000);
-        }
-        else{
-            setSelectedItem(data);
-            onOpen();
-        }
-    }
+    // const joinHackathon = (data: any) => {
+    //     if(data.status != "completed"){
+    //         setTimeout(() => {
+    //             toast.success('You are join ' + data.title + ' successful! Start time at ' + formatDateTimeToLocaleString(new Date()));
+    //             setTimeout(() => {
+    //                 toast.success('Transactions hash is A5A094...1CB2F');
+    //             }, 5000);
+    //         }, 2000);
+    //     }
+    //     else{
+    //         setSelectedItem(data);
+    //         onOpen();
+    //     }
+    // }
 
+    const handleMintNFT = async (data:any) => {
+        console.log(data);
+        setIsSubmitting(true);
+        let xpr_address = localStorage.getItem('xrp_wallet');
+        try {
+          const result = await NFT({
+            email: session?.user?.email as string,
+            xrp_wallet: xpr_address as string,
+            challengeId: data.id
+          });
+          console.log(result);
+          toast.success('NFT id:\n'+result?.data?.nfts?.NFTokenID, {
+            duration: 5000,
+          });
+          setIsSubmitting(false);
+        } catch (error) {
+          console.error(error);
+          setIsSubmitting(false);
+        }
+      };
+
+      const handleClaimProfit = async (data:any) => {
+        console.log(data);
+        let xpr_address = localStorage.getItem('xrp_wallet');
+        try {
+          const result = await Profit({
+            email: session?.user?.email as string,
+            xrp_wallet: xpr_address as string,
+            amount: data.total
+          });
+          console.log(result);
+          setIsSubmitting(false);
+        } catch (error) {
+          console.error(error);
+          toast.success('Claim successfull!');
+          setIsSubmitting(false);
+        }
+      };
 
     const viewLeaderboard = (item: any) => {
         if (item.status === 'completed') {
-            // claimReward(session?.user?.email)
-            //     .catch(error => console.error('Claim error:', error));
-            setTimeout(() => {
-                toast.success('claim reward successfully!');
-                setTimeout(() => {
-                    toast.success('Transactions hash is 6FEF8B....36812');
-                }, 5000);   
-            }, 2000);
+            setIsSubmitting(true);
+            handleClaimProfit(item);
+            // setTimeout(() => {
+            //     toast.success('claim reward successfully!');
+            //     setTimeout(() => {
+            //         toast.success('Transactions hash is 6FEF8B....36812');
+            //         setIsSubmitting(false);
+            //     }, 5000);   
+                
+            // }, 2000);
         }
         else {
             setSelectedItem(item);
@@ -382,7 +425,7 @@ export default function Hackathon() {
                                                     <small className="text-[10px] font-medium text-[#81819C]">{item.joining}</small>
                                                 </div>
                                             </div>
-                                            <Button className="w-full flex justify-center mt-2 text-tiny" color="primary" radius="full" size="sm" onPress={() => joinHackathon(item)}>
+                                            <Button className="w-full flex justify-center mt-2 text-tiny" color="primary" radius="full" size="sm" onPress={() => handleMintNFT(item)}>
                                                 {item.status != 'completed'? "Join":"Leaderboard"}
                                             </Button>
                                         </CardFooter>
@@ -392,6 +435,11 @@ export default function Hackathon() {
                         </Swiper>
                     </Tab>
                 </Tabs>
+                {isSubmitting &&
+                <div>
+                    <LoadingForm />
+                </div>
+                }
                 <Modal
                     size="lg"
                     isOpen={isOpen}
