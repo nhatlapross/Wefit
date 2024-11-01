@@ -20,21 +20,15 @@ interface MintNFTRes {
   }
 }
 
-interface CreateChallengeProps {
+interface CreateChallengeConfigProps {
+  configId: number,
+  duration: number,
+  symbol: string,
   challengeId: number,
-  amount: number,
-  date: Date,
-  owner: string,
-  challenge_type: number,
-  pool_prize: number,
-  price: number,
-  expected_return: number,
-  expire_date: number,
-  distance_goal: number,
-  participants_limit: number
+  bidRate: number
 }
 
-const useCreateChallenge = () => {
+const useWithDrawChallenge = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   function getFirstAndLastFourChars(str: string): string {
@@ -45,17 +39,13 @@ const useCreateChallenge = () => {
     const lastFour = str.slice(-4);
     return `${firstFour}...${lastFour}`;
   }  
-  const Challange = useCallback(async (req: CreateChallengeProps): Promise<MintNFTRes | null> => {
-    console.log('Create challenge for ', req.owner); // Debug log
+  const Challange = useCallback(async (req: CreateChallengeConfigProps): Promise<MintNFTRes | null> => {
+    
     setIsLoading(true);
     setError(null);
 
     try {
-      if (!req.owner) {
-        throw new Error('Owner is required');
-      }
-
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BACKEND}/v1/challenge`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BACKEND}/v1/challenge/withdrawChallenge`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -64,16 +54,10 @@ const useCreateChallenge = () => {
         // Correct way to stringify the request body
         body: JSON.stringify({
           challengeId: req.challengeId,
-          amount: req.amount,
-          date: req.date,
-          owner: req.owner,
-          challenge_type: req.challenge_type,
-          pool_prize: req.pool_prize,
-          price: req.price,
-          expected_return: req.expected_return,
-          expire_date: req.expire_date,
-          distance_goal: req.distance_goal,
-          participants_limit: req.participants_limit
+          configId: req.configId,
+          symbol: req.symbol,
+          duration: req.duration,
+          bidRate: req.bidRate,
         }),
         credentials: 'include',
       });
@@ -86,7 +70,7 @@ const useCreateChallenge = () => {
       const data = await response.json();
       console.log(response);
       console.log(data);
-      toast.success('Create challenge successfully!');
+      toast.success('Withdraw challenge successfully!');
       toast.success('Transaction hash:\n'+getFirstAndLastFourChars(data.data.transactionHash));
       localStorage.setItem('tx_hash',data.data.transactionHash)
       return data;
@@ -103,4 +87,4 @@ const useCreateChallenge = () => {
   return { Challange, isLoading, error };
 };
 
-export default useCreateChallenge;
+export default useWithDrawChallenge;

@@ -20,6 +20,7 @@ import { Button } from "@nextui-org/button";
 import { Card, CardBody } from "@nextui-org/card";
 import { Tabs, Tab } from "@nextui-org/tabs";
 import SwapIcon from '@/asset/icon/Swap';
+import LoadingForm from '../LoadingForm';
 
 
 
@@ -34,7 +35,7 @@ const ConvertCoin = () => {
     const [sellCoin, setSellCoin] = useState("ethereum");
     const [buyCoin, setBuyCoin] = useState("bitcoin");
     const [coinPrices, setCoinPrices] = useState({});
-
+    const [isSubmitting, setIsSubmitting] = useState(false);
    
     function formatDateTimeToLocaleString(date: Date): string {
         return date.toLocaleDateString('en-GB', {
@@ -82,7 +83,7 @@ const ConvertCoin = () => {
         },
         {
             key: "amountAPT",
-            label: "AMOUNT APT",
+            label: "AMOUNT XRP",
         },
         {
             key: "amountBTC",
@@ -103,11 +104,12 @@ const ConvertCoin = () => {
         if (regex.test(e) && (e <= 5000)) {
             setSellAmount(e);
         }
-        let num = 8.05/56725.01 * sellAmount;
+        let num = 0.5182/71163.66 * sellAmount;
         setBuyAmount(num);
       }
 
     const swap = () => {
+        setIsSubmitting(true);
         const newRow = {
             key: (rows.length + 1).toString(),
             date: formatDateTimeToLocaleString(new Date()),
@@ -116,8 +118,14 @@ const ConvertCoin = () => {
             status: "Success",
         };
 
-        setRows(prevRows => [...prevRows, newRow]);
-        toast.success('Swap successful!');
+
+
+        setTimeout(() => {
+            toast.success('Swap successful!');
+            setIsSubmitting(false);
+            setRows(prevRows => [...prevRows, newRow]);
+        }, 3000);
+        
         setSellAmount(0);
         setBuyAmount(0);
     }
@@ -147,7 +155,7 @@ const ConvertCoin = () => {
                 <CardBody className="p-6">
                     <div className="space-y-4">
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">From(max: 5000 APT)</label>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">From(max: 5000 XRP)</label>
                             <Input
                                 type="text"
                                 value={sellAmount.toString()}
@@ -155,10 +163,10 @@ const ConvertCoin = () => {
                                 className="w-full bg-gray-100 text-gray-700 rounded-md"
                                 max={5000}
                                 endContent={
-                                    <h4>APT</h4>
+                                    <h4>XRP</h4>
                                 }
                             />
-                            <p className="text-sm text-gray-500 mt-1">$8.05</p>
+                            <p className="text-sm text-gray-500 mt-1">$0.5182</p>
                         </div>
 
                         <div className="flex justify-center">
@@ -177,7 +185,7 @@ const ConvertCoin = () => {
                                     <h4>ckBTC</h4>
                                 }
                             />
-                            <p className="text-sm text-gray-500 mt-1">$56,678.73</p>
+                            <p className="text-sm text-gray-500 mt-1">$71,163.66</p>
                         </div>
 
                         <Button color="primary" className="w-full mt-3 uppercase text-white"  onClick={()=> swap()}>
@@ -196,8 +204,8 @@ const ConvertCoin = () => {
                         {(item) => (
                             <TableRow>
                                 <TableCell className='text-center'>{item.date}</TableCell>
-                                <TableCell className='text-center'>{parseFloat(item.amountAPT.toFixed(4))}</TableCell> 
-                                <TableCell className='text-center'>{parseFloat(item.amountBTC.toFixed(4))}</TableCell> 
+                                <TableCell className='text-center'>{item.amountAPT.toString().substring(0,6)}</TableCell> 
+                                <TableCell className='text-center'>{item.amountBTC.toString().substring(0,6)}</TableCell> 
                                 <TableCell className='text-center'>{item.status}</TableCell>
                             </TableRow>
                         )}
@@ -205,8 +213,13 @@ const ConvertCoin = () => {
                 </Table>
             </div>
             <Toaster />
+            {isSubmitting &&
+                <div>
+                    <LoadingForm />
+                </div>
+            }
         </div>
-
+        
     );
 
 };

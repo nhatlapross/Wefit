@@ -469,3 +469,11 @@ Error: ESOCKETTIMEDOUT
     at process.processTimers (node:internal/timers:512:7)
     at PollingBlockTracker._performSync (F:\Aptos\Wefit\wefit-backend\node_modules\eth-block-tracker\src\polling.js:51:24)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2024-11-01T15:37:07.043Z error: uncaughtException: PollingBlockTracker - encountered an error while attempting to update latest block:
+Error: getaddrinfo ENOTFOUND rpc-evm-sidechain.xrpl.org
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26)
+Error: PollingBlockTracker - encountered an error while attempting to update latest block:
+Error: getaddrinfo ENOTFOUND rpc-evm-sidechain.xrpl.org
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26)
+    at PollingBlockTracker._performSync (F:\Aptos\Wefit\wefit-backend\node_modules\eth-block-tracker\src\polling.js:51:24)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)

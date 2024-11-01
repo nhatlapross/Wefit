@@ -65,9 +65,6 @@ const useClaimProfit = () => {
 
       const data = await response.json();
       toast.success('Claim profit successfully');
-      setTimeout(() => {
-        toast.success('Transactions address:');
-      }, 2000);
       return data;
     } catch (err: any) {
       const errorMessage = err.message || 'An error occurred while claim profit';
