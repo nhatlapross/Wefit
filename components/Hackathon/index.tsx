@@ -232,20 +232,19 @@ export default function Hackathon() {
         return date.toLocaleString('en-GB'); // Adjust locale as needed
     }
 
-    // const joinHackathon = (data: any) => {
-    //     if(data.status != "completed"){
-    //         setTimeout(() => {
-    //             toast.success('You are join ' + data.title + ' successful! Start time at ' + formatDateTimeToLocaleString(new Date()));
-    //             setTimeout(() => {
-    //                 toast.success('Transactions hash is A5A094...1CB2F');
-    //             }, 5000);
-    //         }, 2000);
-    //     }
-    //     else{
-    //         setSelectedItem(data);
-    //         onOpen();
-    //     }
-    // }
+    const joinHackathon = (data: any) => {
+        if(data.status != "completed"){
+            setTimeout(() => {
+                toast.success('You are join ' + data.title + ' successful! Start time at ' + formatDateTimeToLocaleString(new Date()));
+                handleMintNFT(data);
+            }, 2000);
+        }
+        else{
+            setSelectedItem(data);
+            onOpen();
+        }
+    }
+
     function getFirstAndLastFourChars(str: string): string {
         if (str.length <= 8) {
           return str; // If the string is too short, return it as is
@@ -433,7 +432,7 @@ export default function Hackathon() {
                                                     <small className="text-[10px] font-medium text-[#81819C]">{item.joining}</small>
                                                 </div>
                                             </div>
-                                            <Button className="w-full flex justify-center mt-2 text-tiny" color="primary" radius="full" size="sm" onPress={() => handleMintNFT(item)}>
+                                            <Button className="w-full flex justify-center mt-2 text-tiny" color="primary" radius="full" size="sm" onPress={() => joinHackathon(item)}>
                                                 {item.status != 'completed'? "Join":"Leaderboard"}
                                             </Button>
                                         </CardFooter>

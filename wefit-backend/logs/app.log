@@ -404,3 +404,68 @@ Error: getaddrinfo ENOTFOUND rpc-evm-sidechain.xrpl.org
 2024-10-28T13:27:53.704Z info: Create challenge error: 
 2024-10-28T13:28:15.066Z info: Create challenge error: 
 2024-10-28T13:31:07.188Z info: Create challenge error: 
+2024-10-28T17:38:43.518Z error: uncaughtException: PollingBlockTracker - encountered an error while attempting to update latest block:
+Error: ETIMEDOUT
+    at Timeout.<anonymous> (F:\Aptos\Wefit\wefit-backend\node_modules\request\request.js:848:19)
+    at listOnTimeout (node:internal/timers:569:17)
+    at process.processTimers (node:internal/timers:512:7)
+Error: PollingBlockTracker - encountered an error while attempting to update latest block:
+Error: ETIMEDOUT
+    at Timeout.<anonymous> (F:\Aptos\Wefit\wefit-backend\node_modules\request\request.js:848:19)
+    at listOnTimeout (node:internal/timers:569:17)
+    at process.processTimers (node:internal/timers:512:7)
+    at PollingBlockTracker._performSync (F:\Aptos\Wefit\wefit-backend\node_modules\eth-block-tracker\src\polling.js:51:24)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2024-10-30T15:04:33.937Z info: Withdraw challenge error: 
+2024-10-30T15:12:56.027Z info: Withdraw challenge error: 
+2024-10-30T15:13:01.154Z info: Withdraw challenge error: 
+2024-10-30T15:13:35.094Z info: Withdraw challenge error: 
+2024-10-30T15:13:37.202Z info: Withdraw challenge error: 
+2024-10-30T15:14:00.326Z info: Withdraw challenge error: 
+2024-10-30T15:17:56.740Z info: Withdraw challenge error: 
+2024-10-30T15:17:58.189Z info: Withdraw challenge error: 
+2024-10-30T15:18:04.565Z info: Withdraw challenge error: 
+2024-10-30T15:20:13.667Z info: Withdraw challenge error: 
+2024-10-30T16:12:12.023Z info: Withdraw challenge error: 
+2024-10-30T16:12:46.963Z info: Withdraw challenge error: 
+2024-10-30T16:23:23.346Z info: Create challenge config error: 
+2024-10-30T16:44:23.463Z error: uncaughtException: PollingBlockTracker - encountered an error while attempting to update latest block:
+Error: ETIMEDOUT
+    at Timeout.<anonymous> (F:\Aptos\Wefit\wefit-backend\node_modules\request\request.js:848:19)
+    at listOnTimeout (node:internal/timers:569:17)
+    at process.processTimers (node:internal/timers:512:7)
+Error: PollingBlockTracker - encountered an error while attempting to update latest block:
+Error: ETIMEDOUT
+    at Timeout.<anonymous> (F:\Aptos\Wefit\wefit-backend\node_modules\request\request.js:848:19)
+    at listOnTimeout (node:internal/timers:569:17)
+    at process.processTimers (node:internal/timers:512:7)
+    at PollingBlockTracker._performSync (F:\Aptos\Wefit\wefit-backend\node_modules\eth-block-tracker\src\polling.js:51:24)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2024-10-31T15:34:53.167Z error: uncaughtException: PollingBlockTracker - encountered an error while attempting to update latest block:
+Error: ESOCKETTIMEDOUT
+    at ClientRequest.<anonymous> (F:\Aptos\Wefit\wefit-backend\node_modules\request\request.js:816:19)
+    at Object.onceWrapper (node:events:631:28)
+    at ClientRequest.emit (node:events:517:28)
+    at ClientRequest.emit (node:domain:489:12)
+    at TLSSocket.emitRequestTimeout (node:_http_client:847:9)
+    at Object.onceWrapper (node:events:631:28)
+    at TLSSocket.emit (node:events:529:35)
+    at TLSSocket.emit (node:domain:489:12)
+    at Socket._onTimeout (node:net:598:8)
+    at listOnTimeout (node:internal/timers:569:17)
+    at process.processTimers (node:internal/timers:512:7)
+Error: PollingBlockTracker - encountered an error while attempting to update latest block:
+Error: ESOCKETTIMEDOUT
+    at ClientRequest.<anonymous> (F:\Aptos\Wefit\wefit-backend\node_modules\request\request.js:816:19)
+    at Object.onceWrapper (node:events:631:28)
+    at ClientRequest.emit (node:events:517:28)
+    at ClientRequest.emit (node:domain:489:12)
+    at TLSSocket.emitRequestTimeout (node:_http_client:847:9)
+    at Object.onceWrapper (node:events:631:28)
+    at TLSSocket.emit (node:events:529:35)
+    at TLSSocket.emit (node:domain:489:12)
+    at Socket._onTimeout (node:net:598:8)
+    at listOnTimeout (node:internal/timers:569:17)
+    at process.processTimers (node:internal/timers:512:7)
+    at PollingBlockTracker._performSync (F:\Aptos\Wefit\wefit-backend\node_modules\eth-block-tracker\src\polling.js:51:24)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
